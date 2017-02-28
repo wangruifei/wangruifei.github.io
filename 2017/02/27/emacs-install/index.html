@@ -15,16 +15,19 @@
 
 
 
-<meta name="description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个G，而且安装出问题，弄的好不纯粹。于是开始入手emacs">
+<meta name="description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。
+Emacs 安装由于emacs有ter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="emacs-install">
+<meta property="og:title" content="Emacs-Install">
 <meta property="og:url" content="http://yoursite.com/2017/02/27/emacs-install/index.html">
 <meta property="og:site_name" content="王瑞飞">
-<meta property="og:description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个G，而且安装出问题，弄的好不纯粹。于是开始入手emacs">
-<meta property="og:updated_time" content="2017-02-28T04:07:51.000Z">
+<meta property="og:description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。
+Emacs 安装由于emacs有ter">
+<meta property="og:updated_time" content="2017-02-28T04:26:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="emacs-install">
-<meta name="twitter:description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个G，而且安装出问题，弄的好不纯粹。于是开始入手emacs">
+<meta name="twitter:title" content="Emacs-Install">
+<meta name="twitter:description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。
+Emacs 安装由于emacs有ter">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>emacs-install | 王瑞飞</title>
+<title>Emacs-Install | 王瑞飞</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -275,7 +278,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      emacs-install
+      Emacs-Install
     </h1>
   
 
@@ -300,7 +303,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>  1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个G，而且安装出问题，弄的好不纯粹。于是开始入手emacs</p>
+        <p>  1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.<br>  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。</p>
+<h2 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h2><p>由于emacs有terminal和GUI版本，一个是在命令行，一个是在图形界面，但是这两个其实没什么差别。因为在终端里展示的emacs和GUI的emacs布局和功能完全一样。因此你可以选择你需要的安装。我同时安装了GUI和terminal两个。我建议都安装，因为我用到了一个大神的emacs配置文件，而这个配置文件在termimal版本下有bug，目前还未修复。所以我等不及了，上手的是GUI</p>
+<p>下载地址：<a href="https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg" target="_blank" rel="external">https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg</a></p>
+<p>安装这个emacs后下面就可以开始配置emacs了。这个配置文件的相关源码可以在github上找到<a href="https://github.com/purcell/emacs.d" target="_blank" rel="external">https://github.com/purcell/emacs.d</a></p>
+<p>###安装配置文件</p>
+<pre><code class="bash">git <span class="built_in">clone</span> https://github.com/purcell/emacs.d.git ~/.emacs.d
+</code></pre>
 
       
     </div>
@@ -309,12 +318,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/27/emacs-install/">emacs-install</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/27/emacs-install/">Emacs-Install</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
         <p><span>发布时间:</span>2017-02-27, 23:55:33</p>
-        <p><span>最后更新:</span>2017-02-28, 12:07:51</p>
+        <p><span>最后更新:</span>2017-02-28, 12:26:26</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/27/emacs-install/" title="emacs-install">http://yoursite.com/2017/02/27/emacs-install/</a>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/27/emacs-install/" title="Emacs-Install">http://yoursite.com/2017/02/27/emacs-install/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/02/27/emacs-install/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -327,12 +336,12 @@
 
     <nav id="article-nav">
         
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/01/08/hello-world/">
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/28/hello-world/">
                     Hello World
                 </a>
             </div>
+        
         
     </nav>
 
@@ -342,7 +351,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs-安装"><span class="toc-number">1.</span> <span class="toc-text">Emacs 安装</span></a></li></ol>
         
     </div>
     <style>
@@ -378,7 +387,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"emacs-install　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Emacs-Install　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -398,19 +407,19 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/02/28/hello-world/" title="上一篇: Hello World">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/01/08/hello-world/" title="下一篇: Hello World">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/emacs-install/">emacs-install</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/08/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/28/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/emacs-install/">Emacs-Install</a></li></ul>
 
 
 
