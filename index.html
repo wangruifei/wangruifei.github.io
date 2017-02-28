@@ -140,13 +140,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -258,7 +258,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
   
@@ -359,7 +359,10 @@
 <h2 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h2><p>由于emacs有terminal和GUI版本，一个是在命令行，一个是在图形界面，但是这两个其实没什么差别。因为在终端里展示的emacs和GUI的emacs布局和功能完全一样。因此你可以选择你需要的安装。我同时安装了GUI和terminal两个。我建议都安装，因为我用到了一个大神的emacs配置文件，而这个配置文件在termimal版本下有bug，目前还未修复。所以我等不及了，上手的是GUI</p>
 <p>下载地址：<a href="https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg" target="_blank" rel="external">https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg</a></p>
 <p>安装这个emacs后下面就可以开始配置emacs了。这个配置文件的相关源码可以在github上找到<a href="https://github.com/purcell/emacs.d" target="_blank" rel="external">https://github.com/purcell/emacs.d</a></p>
-<h3 id="安装配置文件"><a href="#安装配置文件" class="headerlink" title="安装配置文件"></a>安装配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/purcell/emacs.d.git ~/.emacs.d</div><div class="line">``` </div><div class="line">如果提示文件夹.emacs.d已存在，去删掉这个文件夹然后重新执行这条命令就可以了</div><div class="line"></div><div class="line"><span class="comment">### 启动emacs，验证配置生效</span></div><div class="line"></div><div class="line">1.在图形界面启动直接去application中找到emacs双击启动就好</div><div class="line">2.在Terminal下启动GUI emacs 输入命令</div><div class="line"> </div><div class="line">``` bash</div><div class="line">open <span class="_">-a</span> emacs fileName</div></pre></td></tr></table></figure>
+<h3 id="安装配置文件"><a href="#安装配置文件" class="headerlink" title="安装配置文件"></a>安装配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/purcell/emacs.d.git ~/.emacs.d</div></pre></td></tr></table></figure>
+<p>如果提示文件夹.emacs.d已存在，去删掉这个文件夹然后重新执行这条命令就可以了</p>
+<h3 id="启动emacs，验证配置生效"><a href="#启动emacs，验证配置生效" class="headerlink" title="启动emacs，验证配置生效"></a>启动emacs，验证配置生效</h3><p>1.在图形界面启动直接去application中找到emacs双击启动就好<br>2.在Terminal下启动GUI emacs 输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open <span class="_">-a</span> emacs fileName</div></pre></td></tr></table></figure>
 <p>第一次打开需要下载安装一些包会慢一些，等一段时间后可以看到这样一个界面</p>
 
       
@@ -405,14 +408,14 @@
                 2016-2017 王瑞飞
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -421,7 +424,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -454,9 +457,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
