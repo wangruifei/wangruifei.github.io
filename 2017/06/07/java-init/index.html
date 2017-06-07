@@ -15,25 +15,22 @@
 
 
 
-<meta name="description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。
-Emacs 安装由于emacs有ter">
+<meta name="description" content="Java的初始化包括：成员初始化，构造器初始化，数组初始化
+#成员初始化Java尽力保证：所有变量在使用前都能得到恰当的初始化，对于java类成员变量，在未制定值时会赋予默认值；而对于java方法的局部变量，java以编译时错误的形式来保证必须进行方法成员的初始化工作，用以提醒开发者。所以以下的代码会编译不通过
+1234567891011121314151617181920212223242526">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Emacs-Install">
-<meta property="og:url" content="wangruifei.github.io/2017/02/27/emacs-install/index.html">
+<meta property="og:title" content="Java--初始化">
+<meta property="og:url" content="wangruifei.github.io/2017/06/07/java-init/index.html">
 <meta property="og:site_name" content="王瑞飞">
-<meta property="og:description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。
-Emacs 安装由于emacs有ter">
-<meta property="og:image" content="http://i1.piimg.com/586854/d562b791985690df.jpg">
-<meta property="og:image" content="http://p1.bqimg.com/586854/adde48f934a56920.jpg">
-<meta property="og:image" content="http://p1.bqimg.com/586854/c5661003303710d5.jpg">
-<meta property="og:image" content="http://p1.bqimg.com/586854/67de1efd82cf5f48.jpg">
-<meta property="og:image" content="http://p1.bqimg.com/586854/6a1cc503b282835c.jpg">
-<meta property="og:updated_time" content="2017-02-28T16:51:29.000Z">
+<meta property="og:description" content="Java的初始化包括：成员初始化，构造器初始化，数组初始化
+#成员初始化Java尽力保证：所有变量在使用前都能得到恰当的初始化，对于java类成员变量，在未制定值时会赋予默认值；而对于java方法的局部变量，java以编译时错误的形式来保证必须进行方法成员的初始化工作，用以提醒开发者。所以以下的代码会编译不通过
+1234567891011121314151617181920212223242526">
+<meta property="og:updated_time" content="2017-06-07T16:02:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Emacs-Install">
-<meta name="twitter:description" content="1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。
-Emacs 安装由于emacs有ter">
-<meta name="twitter:image" content="http://i1.piimg.com/586854/d562b791985690df.jpg">
+<meta name="twitter:title" content="Java--初始化">
+<meta name="twitter:description" content="Java的初始化包括：成员初始化，构造器初始化，数组初始化
+#成员初始化Java尽力保证：所有变量在使用前都能得到恰当的初始化，对于java类成员变量，在未制定值时会赋予默认值；而对于java方法的局部变量，java以编译时错误的形式来保证必须进行方法成员的初始化工作，用以提醒开发者。所以以下的代码会编译不通过
+1234567891011121314151617181920212223242526">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -65,7 +62,7 @@ Emacs 安装由于emacs有ter">
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Emacs-Install | 王瑞飞</title>
+<title>Java--初始化 | 王瑞飞</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +262,11 @@ Emacs 安装由于emacs有ter">
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-emacs-install" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-java-init" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/27/emacs-install/" class="article-date">
-      <time datetime="2017-02-27T15:55:33.000Z" itemprop="datePublished">2017-02-27</time>
+      <a href="/2017/06/07/java-init/" class="article-date">
+      <time datetime="2017-06-07T08:53:46.000Z" itemprop="datePublished">2017-06-07</time>
 </a>
 
 
@@ -284,7 +281,7 @@ Emacs 安装由于emacs有ter">
         
   
     <h1 class="article-title" itemprop="name">
-      Emacs-Install
+      Java--初始化
     </h1>
   
 
@@ -293,13 +290,13 @@ Emacs 安装由于emacs有ter">
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/tool/">tool</a>
+    <a class="article-category-link" href="/categories/learning/">learning</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/emacs/">emacs</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java编程思想/">java编程思想</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -309,30 +306,12 @@ Emacs 安装由于emacs有ter">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>  1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.<br>  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。</p>
-<h2 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h2><p>由于emacs有terminal和GUI版本，一个是在命令行，一个是在图形界面，但是这两个其实没什么差别。因为在终端里展示的emacs和GUI的emacs布局和功能完全一样。因此你可以选择你需要的安装。我只安装了terminal下的emacs。同时用到了一个大神的emacs配置文件，因为原生的emacs不是和人性化，而这个大神的自定义配置非常好用。拿来主义主义，何乐不为？</p>
-<p>GUI版本下载地址：<a href="https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg" target="_blank" rel="external">https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg</a><br>terminal版本安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install emacs --with-cocoa</div></pre></td></tr></table></figure>
-<p>安装这emacs后下面就可以开始配置emacs了。这个配置文件的相关源码可以在github上找到<a href="https://github.com/purcell/emacs.d" target="_blank" rel="external">https://github.com/purcell/emacs.d</a></p>
-<h3 id="安装配置文件"><a href="#安装配置文件" class="headerlink" title="安装配置文件"></a>安装配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/purcell/emacs.d.git ~/.emacs.d</div></pre></td></tr></table></figure>
-<p>如果提示文件夹.emacs.d已存在，去删掉这个文件夹然后重新执行这条命令就可以了</p>
-<h3 id="启动emacs，验证配置生效"><a href="#启动emacs，验证配置生效" class="headerlink" title="启动emacs，验证配置生效"></a>启动emacs，验证配置生效</h3><p>1.在图形界面启动直接去application中找到emacs双击启动就好<br>2.在Terminal下启动GUI emacs 输入命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open <span class="_">-a</span> emacs fileName</div></pre></td></tr></table></figure>
-<p>3.在terminal下启动terminal emacs 直接输入 emacs 即可</p>
-<p>第一次打开需要下载安装一些包会慢一些，等一段时间后可以看到这样一个界面,既配置成功</p>
-<p><img src="http://i1.piimg.com/586854/d562b791985690df.jpg" alt="emacs初始界面"></p>
-<h3 id="Mac键盘-M-x-按键调整"><a href="#Mac键盘-M-x-按键调整" class="headerlink" title="Mac键盘 M-x 按键调整"></a>Mac键盘 M-x 按键调整</h3><p>emacs需要经常使用到ctrl键和alt键，但是在mac键盘的默认配置中是没有alt按键的。此时需要对自己的键盘做调整。</p>
-<p>我是将左边的option按键当成alt按键<br>1.在terminal模式下，找到emacs的配置文件.emacs.d/init.el 加如下配置更改键盘</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(setq ns-right-alternate-modifier nil)</div></pre></td></tr></table></figure>
-<p>2.或者在term终端工具的“偏好设置”-“描述文件”-“键盘”，勾选“将option键作为Meta键”也可以</p>
-<p><img src="http://p1.bqimg.com/586854/adde48f934a56920.jpg" alt="终端修改按键"></p>
-<h3 id="到此emacs的基本配置就结束啦～～～～"><a href="#到此emacs的基本配置就结束啦～～～～" class="headerlink" title="到此emacs的基本配置就结束啦～～～～"></a>到此emacs的基本配置就结束啦～～～～</h3><h2 id="emacs中编译执行c-c"><a href="#emacs中编译执行c-c" class="headerlink" title="emacs中编译执行c++/c"></a>emacs中编译执行c++/c</h2><h4 id="1-emacs创建新文件helloWorld-cpp"><a href="#1-emacs创建新文件helloWorld-cpp" class="headerlink" title="1.emacs创建新文件helloWorld.cpp"></a>1.emacs创建新文件helloWorld.cpp</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">emacs helloWorld.cpp</div></pre></td></tr></table></figure>
-<p>此处需要知道，emacs代码是根据文件类型进行高亮的，如果你创建的文件叫helloWorld而不是helloWorld.cpp<br>那么很可能代码就没有高亮效果</p>
-<h4 id="2-编写最经典的helloworld程序"><a href="#2-编写最经典的helloworld程序" class="headerlink" title="2.编写最经典的helloworld程序"></a>2.编写最经典的helloworld程序</h4><p><img src="http://p1.bqimg.com/586854/c5661003303710d5.jpg" alt="helloWorld"></p>
-<h4 id="Meta-x-compile-进行编译（其中Meta-x-就是-alt-x按键）"><a href="#Meta-x-compile-进行编译（其中Meta-x-就是-alt-x按键）" class="headerlink" title="Meta-x compile 进行编译（其中Meta-x 就是 alt+x按键）"></a>Meta-x compile 进行编译（其中Meta-x 就是 alt+x按键）</h4><p>此处我用clang++ 进行编译</p>
-<p><img src="http://p1.bqimg.com/586854/67de1efd82cf5f48.jpg" alt="编译"></p>
-<h3 id="Meta-x-shell-启动shell执行编译后的输出文件a-out"><a href="#Meta-x-shell-启动shell执行编译后的输出文件a-out" class="headerlink" title="Meta+x shell 启动shell执行编译后的输出文件a.out"></a>Meta+x shell 启动shell执行编译后的输出文件a.out</h3><p><img src="http://p1.bqimg.com/586854/6a1cc503b282835c.jpg" alt="输出"></p>
-<p>自此，命令行下编写，编译，执行c／c++ 的开发环境就弄好了。配合着vim使用药效更佳。</p>
+        <p>Java的初始化包括：<strong>成员初始化</strong>，<strong>构造器初始化</strong>，<strong>数组初始化</strong></p>
+<p>#成员初始化<br>Java尽力保证：所有变量在使用前都能得到恰当的初始化，对于java<strong>类成员变量</strong>，在未制定值时会赋予默认值；而对于java方法的局部变量，java以编译时错误的形式来保证必须进行<strong>方法成员</strong>的初始化工作，用以提醒开发者。<br>所以以下的代码会编译不通过</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> i;</div><div class="line">  i++;<span class="comment">//错误，i未被初始化</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">``` </div><div class="line"></div><div class="line">但是对于**类成员变量**情况和上面的有所不同（针对基本数据类型），类的每个基本数据类型都会保证有一个初始值。</div><div class="line"></div><div class="line">``` java</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitialValues</span> </span>&#123;</div><div class="line">    <span class="keyword">boolean</span> t;</div><div class="line">    <span class="keyword">char</span> c;</div><div class="line">    <span class="keyword">byte</span> b;</div><div class="line">    <span class="keyword">short</span> s;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">long</span> l;</div><div class="line">    <span class="keyword">float</span> f;</div><div class="line">    <span class="keyword">double</span> d;</div><div class="line">    InitialValues reference;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printInitialValues</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"boolean "</span> + t);</div><div class="line">        System.out.println(<span class="string">"char "</span> + c);</div><div class="line">        System.out.println(<span class="string">"byte "</span> + b);</div><div class="line">        System.out.println(<span class="string">"short "</span> + s);</div><div class="line">        System.out.println(<span class="string">"int "</span> + i);</div><div class="line">        System.out.println(<span class="string">"long "</span> + l);</div><div class="line">        System.out.println(<span class="string">"float "</span> + f);</div><div class="line">        System.out.println(<span class="string">"double "</span> + d);</div><div class="line">        System.out.println(<span class="string">"reference"</span> + reference);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> InitialValues().printInitialValues();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">boolean</span> <span class="keyword">false</span></div><div class="line"><span class="keyword">char</span>      <span class="comment">//因为char为0 所以显示空白</span></div><div class="line"><span class="keyword">byte</span> <span class="number">0</span></div><div class="line"><span class="keyword">short</span> <span class="number">0</span></div><div class="line"><span class="keyword">int</span> <span class="number">0</span></div><div class="line"><span class="keyword">long</span> <span class="number">0</span></div><div class="line"><span class="keyword">float</span> <span class="number">0.0</span></div><div class="line"><span class="keyword">double</span> <span class="number">0.0</span></div><div class="line">reference <span class="keyword">null</span></div></pre></td></tr></table></figure>
+<p>###结论<br>类中的基本成员变量会被赋予初始值，而方法提中的局部基本成员变量并不会；类中的对象引用，会被初始化为null。</p>
 
       
     </div>
@@ -341,13 +320,13 @@ Emacs 安装由于emacs有ter">
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/27/emacs-install/">Emacs-Install</a></p>
+        <p><span>本文标题:</span><a href="/2017/06/07/java-init/">Java--初始化</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
-        <p><span>发布时间:</span>2017-02-27, 23:55:33</p>
-        <p><span>最后更新:</span>2017-03-01, 00:51:29</p>
+        <p><span>发布时间:</span>2017-06-07, 16:53:46</p>
+        <p><span>最后更新:</span>2017-06-08, 00:02:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/02/27/emacs-install/" title="Emacs-Install">wangruifei.github.io/2017/02/27/emacs-install/</a>
-            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/02/27/emacs-install/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/07/java-init/" title="Java--初始化">wangruifei.github.io/2017/06/07/java-init/</a>
+            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/06/07/java-init/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -359,12 +338,12 @@ Emacs 安装由于emacs有ter">
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/03/02/spring-1/">
-                    spring学习小结-第一章
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/05/04/owncloud-install/">
+                    owncloud搭建
                 </a>
             </div>
-        
         
     </nav>
 
@@ -374,7 +353,7 @@ Emacs 安装由于emacs有ter">
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Emacs-安装"><span class="toc-number">1.</span> <span class="toc-text">Emacs 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装配置文件"><span class="toc-number">1.1.</span> <span class="toc-text">安装配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动emacs，验证配置生效"><span class="toc-number">1.2.</span> <span class="toc-text">启动emacs，验证配置生效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac键盘-M-x-按键调整"><span class="toc-number">1.3.</span> <span class="toc-text">Mac键盘 M-x 按键调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#到此emacs的基本配置就结束啦～～～～"><span class="toc-number">1.4.</span> <span class="toc-text">到此emacs的基本配置就结束啦～～～～</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#emacs中编译执行c-c"><span class="toc-number">2.</span> <span class="toc-text">emacs中编译执行c++/c</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-emacs创建新文件helloWorld-cpp"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.emacs创建新文件helloWorld.cpp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-编写最经典的helloworld程序"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.编写最经典的helloworld程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Meta-x-compile-进行编译（其中Meta-x-就是-alt-x按键）"><span class="toc-number">2.0.3.</span> <span class="toc-text">Meta-x compile 进行编译（其中Meta-x 就是 alt+x按键）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Meta-x-shell-启动shell执行编译后的输出文件a-out"><span class="toc-number">2.1.</span> <span class="toc-text">Meta+x shell 启动shell执行编译后的输出文件a.out</span></a></li></ol></li></ol>
+            
         
     </div>
     <style>
@@ -410,7 +389,7 @@ Emacs 安装由于emacs有ter">
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Emacs-Install　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Java--初始化　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -426,7 +405,7 @@ Emacs 安装由于emacs有ter">
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/27/emacs-install/" data-title="Emacs-Install" data-url="wangruifei.github.io/2017/02/27/emacs-install/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/06/07/java-init/" data-title="Java--初始化" data-url="wangruifei.github.io/2017/06/07/java-init/"></div>
     <script>
         var duoshuoQuery = {short_name:"wangruifei"};
         var loadComment = function(){
@@ -449,15 +428,15 @@ Emacs 安装由于emacs有ter">
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/03/02/spring-1/" title="上一篇: spring学习小结-第一章">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/05/04/owncloud-install/" title="下一篇: owncloud搭建">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
