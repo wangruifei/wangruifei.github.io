@@ -15,19 +15,31 @@
 
 
 
-<meta name="description" content="在服务器端工作了1年多，虽然一直在用spring框架，但是对它的了解也仅止于会用，知其然而不知其所以然。因此开始了我的spring学习之旅的第一章。在这里其实很感谢前东家对我的包容与帮助，在我不断犯错的情况下仍能给予耐心的指导。
-序幕spring是一个开源框架，是为解决现有框架之“重”，简化企业级java开发复杂性而提出。spring能有助于java应用的简单性，可测试性和松耦合。它的核心特性是D">
+<meta name="description" content="异常限制点：
+
+派生类构造器不能捕获基类构造器抛出的异常
+派生类覆盖后的方法，可以抛出基类方法异常说明中的异常的派生异常（有点拗口）
+派生类覆盖后的方法可以不抛出基类异常说明中的异常（即便基类方法中含有异常说明，此处也说明了，某个特定方法的“异常说明接口”在继承和覆盖的过程中“变小了”），但是派生类覆盖后的方法不能抛出基类不含有的异常说明
+异常限制对派生类的构造函数比较特殊，派生类的构造函数可以抛">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring学习小结-第一章">
-<meta property="og:url" content="wangruifei.github.io/2017/03/02/spring-1/index.html">
+<meta property="og:title" content="异常的限制">
+<meta property="og:url" content="wangruifei.github.io/2017/07/30/java-exceprion-limit-rule/index.html">
 <meta property="og:site_name" content="王瑞飞">
-<meta property="og:description" content="在服务器端工作了1年多，虽然一直在用spring框架，但是对它的了解也仅止于会用，知其然而不知其所以然。因此开始了我的spring学习之旅的第一章。在这里其实很感谢前东家对我的包容与帮助，在我不断犯错的情况下仍能给予耐心的指导。
-序幕spring是一个开源框架，是为解决现有框架之“重”，简化企业级java开发复杂性而提出。spring能有助于java应用的简单性，可测试性和松耦合。它的核心特性是D">
-<meta property="og:updated_time" content="2017-03-04T00:42:38.000Z">
+<meta property="og:description" content="异常限制点：
+
+派生类构造器不能捕获基类构造器抛出的异常
+派生类覆盖后的方法，可以抛出基类方法异常说明中的异常的派生异常（有点拗口）
+派生类覆盖后的方法可以不抛出基类异常说明中的异常（即便基类方法中含有异常说明，此处也说明了，某个特定方法的“异常说明接口”在继承和覆盖的过程中“变小了”），但是派生类覆盖后的方法不能抛出基类不含有的异常说明
+异常限制对派生类的构造函数比较特殊，派生类的构造函数可以抛">
+<meta property="og:updated_time" content="2017-07-30T08:18:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring学习小结-第一章">
-<meta name="twitter:description" content="在服务器端工作了1年多，虽然一直在用spring框架，但是对它的了解也仅止于会用，知其然而不知其所以然。因此开始了我的spring学习之旅的第一章。在这里其实很感谢前东家对我的包容与帮助，在我不断犯错的情况下仍能给予耐心的指导。
-序幕spring是一个开源框架，是为解决现有框架之“重”，简化企业级java开发复杂性而提出。spring能有助于java应用的简单性，可测试性和松耦合。它的核心特性是D">
+<meta name="twitter:title" content="异常的限制">
+<meta name="twitter:description" content="异常限制点：
+
+派生类构造器不能捕获基类构造器抛出的异常
+派生类覆盖后的方法，可以抛出基类方法异常说明中的异常的派生异常（有点拗口）
+派生类覆盖后的方法可以不抛出基类异常说明中的异常（即便基类方法中含有异常说明，此处也说明了，某个特定方法的“异常说明接口”在继承和覆盖的过程中“变小了”），但是派生类覆盖后的方法不能抛出基类不含有的异常说明
+异常限制对派生类的构造函数比较特殊，派生类的构造函数可以抛">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -59,7 +71,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>spring学习小结-第一章 | 王瑞飞</title>
+<title>异常的限制 | 王瑞飞</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -259,11 +271,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-spring-1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-java-exceprion-limit-rule" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/02/spring-1/" class="article-date">
-      <time datetime="2017-03-02T13:53:46.000Z" itemprop="datePublished">2017-03-02</time>
+      <a href="/2017/07/30/java-exceprion-limit-rule/" class="article-date">
+      <time datetime="2017-07-30T07:41:46.000Z" itemprop="datePublished">2017-07-30</time>
 </a>
 
 
@@ -278,7 +290,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      spring学习小结-第一章
+      异常的限制
     </h1>
   
 
@@ -287,13 +299,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/框架/">框架</a>
+    <a class="article-category-link" href="/categories/Java-Basic-knowledge/">Java Basic knowledge</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,8 +315,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在服务器端工作了1年多，虽然一直在用spring框架，但是对它的了解也仅止于会用，知其然而不知其所以然。因此开始了我的spring学习之旅的第一章。在这里其实很感谢前东家对我的包容与帮助，在我不断犯错的情况下仍能给予耐心的指导。</p>
-<h1 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h1><p>spring是一个开源框架，是为解决现有框架之“重”，简化企业级java开发复杂性而提出。spring能有助于java应用的简单性，可测试性和松耦合。它的核心特性是<strong><em>DI(依赖注入)</em></strong>和<strong><em>AOP(切面编程)</em></strong></p>
+        <p>异常限制点：</p>
+<ol>
+<li>派生类构造器不能捕获基类构造器抛出的异常</li>
+<li>派生类覆盖后的方法，可以抛出基类方法异常说明中的异常的派生异常（有点拗口）</li>
+<li>派生类覆盖后的方法可以不抛出基类异常说明中的异常（即便基类方法中含有异常说明，此处也说明了，某个特定方法的“异常说明接口”在继承和覆盖的过程中“变小了”），但是派生类覆盖后的方法不能抛出基类不含有的异常说明</li>
+<li>异常限制对派生类的构造函数比较特殊，派生类的构造函数可以抛出任何异常，而不理会基类构造函数所抛出的异常，但是必须抛出基类构造器的异常说明中的异常</li>
+<li>方法类型是由<strong>方法名</strong>和<strong>参数类型</strong>组成的，因此异常说明来重载方法。</li>
+<li>若代码中处理的对象是派生类，那么编译器会强制要求捕获派生类中抛出的所有异常;若向上转型成基类，那么编译器就就会要求你捕获基类的所有异常。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseballException</span> <span class="keyword">extends</span> <span class="title">Exception</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foul</span> <span class="keyword">extends</span> <span class="title">BaseballException</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Strike</span> <span class="keyword">extends</span> <span class="title">BaseballException</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Inning</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Inning</span><span class="params">()</span> <span class="keyword">throws</span>  BaseballException</span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">event</span><span class="params">()</span> <span class="keyword">throws</span> BaseballException</span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">atBat</span><span class="params">()</span> <span class="keyword">throws</span> Strike,Foul</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">walk</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Storm</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">event</span><span class="params">()</span> <span class="keyword">throws</span> Rainedout</span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rainHard</span><span class="params">()</span> <span class="keyword">throws</span> Rainedout</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StormyInning</span> <span class="keyword">extends</span> <span class="title">Inning</span> <span class="keyword">implements</span> <span class="title">Storm</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StormyInning</span><span class="params">()</span> <span class="keyword">throws</span> Rainedout, BaseballException <span class="comment">//限制点4&#123;</span></span></div><div class="line">    <span class="comment">//限制点1</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="title">StormyInning</span><span class="params">(String s)</span> <span class="keyword">throws</span> Foul,BaseballException&#123;&#125;</div><div class="line"></div><div class="line">   <span class="comment">//  void walk() throws PopFoul,BaseballException&#123;&#125;</span></div><div class="line"></div><div class="line">   <span class="comment">// public void event() throws Rainedout&#123;&#125;</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rainHard</span><span class="params">()</span> <span class="keyword">throws</span> Rainedout </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">atBat</span><span class="params">()</span> <span class="keyword">throws</span> PopFoul </span>&#123;<span class="comment">//限制点2</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">event</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//限制点3</span></div><div class="line">    </div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//限制点5</span></div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            StormyInning si = <span class="keyword">new</span> StormyInning();</div><div class="line">            si.atBat();</div><div class="line">        &#125;<span class="keyword">catch</span> (PopFoul e) &#123;</div><div class="line">            System.out.println(<span class="string">"Pop foul"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (Rainedout e)&#123;</div><div class="line">            System.out.println(<span class="string">"Rained out"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (BaseballException e)&#123;</div><div class="line">            System.out.println(<span class="string">"Generic baseball exception"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//限制点5</span></div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            Inning i = <span class="keyword">new</span> StormyInning();</div><div class="line">            i.atBat();</div><div class="line">        &#125;<span class="keyword">catch</span> (Strike e)&#123;</div><div class="line">            System.out.println(<span class="string">"Strike"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (Foul e) &#123;</div><div class="line">            System.out.println(<span class="string">"Foul"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (Rainedout e)&#123;</div><div class="line">            System.out.print(<span class="string">"RainedOut"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (BaseballException e)&#123;</div><div class="line">            System.out.println(<span class="string">"Generic baseball exception"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -313,13 +333,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/03/02/spring-1/">spring学习小结-第一章</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/30/java-exceprion-limit-rule/">异常的限制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
-        <p><span>发布时间:</span>2017-03-02, 21:53:46</p>
-        <p><span>最后更新:</span>2017-03-04, 08:42:38</p>
+        <p><span>发布时间:</span>2017-07-30, 15:41:46</p>
+        <p><span>最后更新:</span>2017-07-30, 16:18:34</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/03/02/spring-1/" title="spring学习小结-第一章">wangruifei.github.io/2017/03/02/spring-1/</a>
-            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/03/02/spring-1/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/30/java-exceprion-limit-rule/" title="异常的限制">wangruifei.github.io/2017/07/30/java-exceprion-limit-rule/</a>
+            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/07/30/java-exceprion-limit-rule/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -331,16 +351,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/01/ssmgr-plan/">
-                    ssmgr_plan
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/27/emacs-install/">
-                    Emacs-Install
+                <a href="/2017/06/09/categories_ Business/">
+                    Guide to Woodome VPN
                 </a>
             </div>
         
@@ -352,7 +366,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序幕"><span class="toc-number">1.</span> <span class="toc-text">序幕</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -388,7 +402,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"spring学习小结-第一章　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"异常的限制　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -404,7 +418,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/02/spring-1/" data-title="spring学习小结-第一章" data-url="wangruifei.github.io/2017/03/02/spring-1/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/07/30/java-exceprion-limit-rule/" data-title="异常的限制" data-url="wangruifei.github.io/2017/07/30/java-exceprion-limit-rule/"></div>
     <script>
         var duoshuoQuery = {short_name:"wangruifei"};
         var loadComment = function(){
@@ -427,15 +441,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/01/ssmgr-plan/" title="上一篇: ssmgr_plan">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/02/27/emacs-install/" title="下一篇: Emacs-Install">
+            <a href="/2017/06/09/categories_ Business/" title="下一篇: Guide to Woodome VPN">
                 <i class="fa fa-angle-right"></i>
             </a>
         
