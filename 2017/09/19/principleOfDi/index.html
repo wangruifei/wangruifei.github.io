@@ -15,36 +15,39 @@
 
 
 
-<meta name="description" content="DI原理详解标签（空格分隔）： spring
-categories： 框架学习DI（Dependency injection）DI中文叫做依赖注入，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：
+<meta name="description" content="DI（Dependency injection）DI中文叫做依赖注入，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：
 
 什么使控制反转
 为什么控制反转能降低耦合度
 依赖注入是如何实现控制反转
-Spring如何实现依赖注入">
+Spring如何实现依赖注入
+
+传统软件模块布局模式的依赖关系传统的软件结构中，次层模块直接被高层模块调用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="王瑞飞">
+<meta property="og:title" content="DI原理详解">
 <meta property="og:url" content="wangruifei.github.io/2017/09/19/principleOfDi/index.html">
 <meta property="og:site_name" content="王瑞飞">
-<meta property="og:description" content="DI原理详解标签（空格分隔）： spring
-categories： 框架学习DI（Dependency injection）DI中文叫做依赖注入，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：
+<meta property="og:description" content="DI（Dependency injection）DI中文叫做依赖注入，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：
 
 什么使控制反转
 为什么控制反转能降低耦合度
 依赖注入是如何实现控制反转
-Spring如何实现依赖注入">
+Spring如何实现依赖注入
+
+传统软件模块布局模式的依赖关系传统的软件结构中，次层模块直接被高层模块调用">
 <meta property="og:image" content="http://45.77.21.149:1234/owncloud/index.php/s/DPrDbxswNU6JcCd/download">
 <meta property="og:image" content="http://45.77.21.149:1234/owncloud/index.php/s/YnqXL0MdAt3E2QN/download">
-<meta property="og:updated_time" content="2017-09-19T09:22:18.000Z">
+<meta property="og:updated_time" content="2017-09-19T09:27:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="王瑞飞">
-<meta name="twitter:description" content="DI原理详解标签（空格分隔）： spring
-categories： 框架学习DI（Dependency injection）DI中文叫做依赖注入，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：
+<meta name="twitter:title" content="DI原理详解">
+<meta name="twitter:description" content="DI（Dependency injection）DI中文叫做依赖注入，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：
 
 什么使控制反转
 为什么控制反转能降低耦合度
 依赖注入是如何实现控制反转
-Spring如何实现依赖注入">
+Spring如何实现依赖注入
+
+传统软件模块布局模式的依赖关系传统的软件结构中，次层模块直接被高层模块调用">
 <meta name="twitter:image" content="http://45.77.21.149:1234/owncloud/index.php/s/DPrDbxswNU6JcCd/download">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -77,7 +80,7 @@ Spring如何实现依赖注入">
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>王瑞飞</title>
+<title>DI原理详解 | 王瑞飞</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -202,7 +205,7 @@ Spring如何实现依赖注入">
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java编程思想/">java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/">DI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java编程思想/">java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
                     </div>
                 </section>
                 
@@ -281,7 +284,7 @@ Spring如何实现依赖注入">
   
     <div class="article-meta">
       <a href="/2017/09/19/principleOfDi/" class="article-date">
-      <time datetime="2017-09-19T09:22:18.000Z" itemprop="datePublished">2017-09-19</time>
+      <time datetime="2017-09-19T08:53:46.000Z" itemprop="datePublished">2017-09-19</time>
 </a>
 
 
@@ -292,11 +295,36 @@ Spring如何实现依赖注入">
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DI原理详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/spring/">spring</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DI/">DI</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="DI原理详解"><a href="#DI原理详解" class="headerlink" title="DI原理详解"></a>DI原理详解</h1><p>标签（空格分隔）： spring</p>
-<h2 id="categories：-框架学习"><a href="#categories：-框架学习" class="headerlink" title="categories： 框架学习"></a>categories： 框架学习</h2><h2 id="DI（Dependency-injection）"><a href="#DI（Dependency-injection）" class="headerlink" title="DI（Dependency injection）"></a>DI（Dependency injection）</h2><p>DI中文叫做<strong>依赖注入</strong>，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：</p>
+        <h2 id="DI（Dependency-injection）"><a href="#DI（Dependency-injection）" class="headerlink" title="DI（Dependency injection）"></a>DI（Dependency injection）</h2><p>DI中文叫做<strong>依赖注入</strong>，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：</p>
 <ol>
 <li>什么使控制反转</li>
 <li>为什么控制反转能降低耦合度</li>
@@ -329,12 +357,12 @@ Spring如何实现依赖注入">
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/09/19/principleOfDi/"></a></p>
+        <p><span>本文标题:</span><a href="/2017/09/19/principleOfDi/">DI原理详解</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
-        <p><span>发布时间:</span>2017-09-19, 17:22:18</p>
-        <p><span>最后更新:</span>2017-09-19, 17:22:18</p>
+        <p><span>发布时间:</span>2017-09-19, 16:53:46</p>
+        <p><span>最后更新:</span>2017-09-19, 17:27:00</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/09/19/principleOfDi/" title="">wangruifei.github.io/2017/09/19/principleOfDi/</a>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/19/principleOfDi/" title="DI原理详解">wangruifei.github.io/2017/09/19/principleOfDi/</a>
             <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/09/19/principleOfDi/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -362,7 +390,7 @@ Spring如何实现依赖注入">
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DI原理详解"><span class="toc-number">1.</span> <span class="toc-text">DI原理详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#categories：-框架学习"><span class="toc-number">1.1.</span> <span class="toc-text">categories： 框架学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DI（Dependency-injection）"><span class="toc-number">1.2.</span> <span class="toc-text">DI（Dependency injection）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统软件模块布局模式的依赖关系"><span class="toc-number">1.2.1.</span> <span class="toc-text">传统软件模块布局模式的依赖关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖倒置模式的依赖关系"><span class="toc-number">1.2.2.</span> <span class="toc-text">依赖倒置模式的依赖关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举例说明"><span class="toc-number">1.3.</span> <span class="toc-text">举例说明</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DI（Dependency-injection）"><span class="toc-number">1.</span> <span class="toc-text">DI（Dependency injection）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统软件模块布局模式的依赖关系"><span class="toc-number">1.1.</span> <span class="toc-text">传统软件模块布局模式的依赖关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖倒置模式的依赖关系"><span class="toc-number">1.2.</span> <span class="toc-text">依赖倒置模式的依赖关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举例说明"><span class="toc-number">2.</span> <span class="toc-text">举例说明</span></a></li></ol>
         
     </div>
     <style>
@@ -398,7 +426,7 @@ Spring如何实现依赖注入">
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"DI原理详解　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -414,7 +442,7 @@ Spring如何实现依赖注入">
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/09/19/principleOfDi/" data-title="" data-url="wangruifei.github.io/2017/09/19/principleOfDi/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/09/19/principleOfDi/" data-title="DI原理详解" data-url="wangruifei.github.io/2017/09/19/principleOfDi/"></div>
     <script>
         var duoshuoQuery = {short_name:"wangruifei"};
         var loadComment = function(){
@@ -449,7 +477,7 @@ Spring如何实现依赖注入">
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/19/principleOfDi/">principleOfDi</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/ThinkingInJava_Exception/">Java异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/java-exceprion-limit-rule/">异常的限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/categories_ Business/">Guide to Woodome VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/java-init/">Java--初始化</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/owncloud-install/">owncloud搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/ssmgr-plan/">ssmgr_plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/spring-1/">spring学习小结-第一章</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/emacs-install/">Emacs-Install</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/19/principleOfDi/">DI原理详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/ThinkingInJava_Exception/">Java异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/java-exceprion-limit-rule/">异常的限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/categories_ Business/">Guide to Woodome VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/java-init/">Java--初始化</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/owncloud-install/">owncloud搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/ssmgr-plan/">ssmgr_plan</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/spring-1/">spring学习小结-第一章</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/emacs-install/">Emacs-Install</a></li></ul>
 
 
 
