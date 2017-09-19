@@ -140,13 +140,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>Friends</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>About Me</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -258,23 +258,23 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
   
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-principleOfDi" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/09/14/test/" class="article-date">
-      <time datetime="2017-09-14T08:26:23.000Z" itemprop="datePublished">2017-09-14</time>
+      <a href="/2017/09/19/principleOfDi/" class="article-date">
+      <time datetime="2017-09-19T09:22:18.000Z" itemprop="datePublished">2017-09-19</time>
 </a>
 
  
-    <a href="/2017/09/14/test/#comments" title="Comments">
+    <a href="/2017/09/19/principleOfDi/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
-            <span class="ds-thread-count"  data-thread-key="2017/09/14/test/" ></span>
+            <span class="ds-thread-count"  data-thread-key="2017/09/19/principleOfDi/" ></span>
         
         
     </a>
@@ -286,21 +286,35 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/14/test/">test</a>
-    </h1>
-  
-
-      </header>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Alice-&gt;John: Hello John, how are you?</div><div class="line">loop every minute</div><div class="line">    John--&gt;Alice: Great!</div><div class="line">end</div></pre></td></tr></table></figure>
+        <h1 id="DI原理详解"><a href="#DI原理详解" class="headerlink" title="DI原理详解"></a>DI原理详解</h1><p>标签（空格分隔）： spring</p>
+<h2 id="categories：-框架学习"><a href="#categories：-框架学习" class="headerlink" title="categories： 框架学习"></a>categories： 框架学习</h2><h2 id="DI（Dependency-injection）"><a href="#DI（Dependency-injection）" class="headerlink" title="DI（Dependency injection）"></a>DI（Dependency injection）</h2><p>DI中文叫做<strong>依赖注入</strong>，它是实现控制反转（IoC）的一种方式。控制反转是为了使代码模块的耦合关系变弱，因此在详细了解Spring的DI之前，我们需要带着以下几个问题来学习：</p>
+<ol>
+<li>什么使控制反转</li>
+<li>为什么控制反转能降低耦合度</li>
+<li>依赖注入是如何实现控制反转</li>
+<li>Spring如何实现依赖注入</li>
+</ol>
+<h3 id="传统软件模块布局模式的依赖关系"><a href="#传统软件模块布局模式的依赖关系" class="headerlink" title="传统软件模块布局模式的依赖关系"></a>传统软件模块布局模式的依赖关系</h3><p><img src="http://45.77.21.149:1234/owncloud/index.php/s/DPrDbxswNU6JcCd/download" alt="此处输入图片的描述"><br>传统的软件结构中，次层模块直接被高层模块调用和使用，这种设计结构会增加体系结构的耦合程度，高层模块直接依赖于比它低的模块来获取一些功能，会导致高层模块的复用能力被次层模块束缚。<br>正是由于这种缺陷，所以出现了<strong>依赖倒置模式</strong>用以避免高度耦合，同时增加高层模块的可复用能力。</p>
+<h3 id="依赖倒置模式的依赖关系"><a href="#依赖倒置模式的依赖关系" class="headerlink" title="依赖倒置模式的依赖关系"></a>依赖倒置模式的依赖关系</h3><p><img src="http://45.77.21.149:1234/owncloud/index.php/s/YnqXL0MdAt3E2QN/download" alt="此处输入图片的描述"><br>由上图可以看出，相比传统的依赖模式，<strong>依赖倒置模式</strong>增加了一个抽象层来解耦传统结构模式高层对次层（下文的所有“次层”代表比高层要低的层次，因为说次层比较拗口，因此下文统一说为“低层”）的直接依赖关系。这里需要特别注意，<strong>依赖倒置</strong>并不是说从原来的高层直接依赖低层变成了低层依赖高层，而是高层和低层都依赖于抽象层，并且中间的抽象层描述了相关联的<strong>高层的行为方法</strong>，低层模块实现高层抽象模块。因为这种结构，在复用高层模块时就可以任意选择需要的实现类来达到高层的需求</p>
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>上面介绍了<strong>传统模式</strong>和<strong>倒置模式</strong>的区别，估计很多人可能还是不理解，下面我们来举个栗子</p>
+<p>假设，我们有一个UserService类，需要使用mysql查询一张user表获取所有user，传统模式的实现是这样子的(以下代码做了极大的简化)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MysqlDriver</span></span>&#123;</div><div class="line">  <span class="function">List&lt;User&gt; <span class="title">searchUsers</span><span class="params">()</span></span>;<span class="comment">//查询mysql数据库中user表所有用户记录</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">pulic <span class="class"><span class="keyword">class</span> <span class="title">UserService</span></span>&#123;</div><div class="line">  MysqlDriver mysqlDriver;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">(MysqlDriver mysqlDriver)</span></span>&#123;</div><div class="line">    <span class="keyword">this</span>.mysqlDriver = mysqlDriver;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingWithUser</span><span class="params">()</span></span>&#123;</div><div class="line">    List&lt;User&gt; users = mysqlDriver.searchUsers();</div><div class="line">    <span class="comment">//处理users</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>好，上面我们用mysql完成了查询users的功能，那么现在因为公司需要，需要切换到oracle数据库，我们除了需要编写oracle的查询user的操作，还要在UserService中做如下更改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">pulic <span class="class"><span class="keyword">class</span> <span class="title">UserService</span></span>&#123;</div><div class="line"></div><div class="line">  OracleDriver oracleDriver;<span class="comment">//需要改成oracle</span></div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">(OracleDriver oracleDriver)</span></span>&#123;<span class="comment">//参数需要改成oracle</span></div><div class="line">    <span class="keyword">this</span>.oracleDriver = oracleDriver;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingWithUser</span><span class="params">()</span></span>&#123;</div><div class="line">    List&lt;User&gt; users = oracleDriver.searchUsers();</div><div class="line">    <span class="comment">//处理users</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面改一下还是很快的嘛，好，如果这个时候需要改成sqlServer数据库呢？ 虽然一个公司不会经常更改数据库，但是这个例子可以说明高层类UserService的可复用度是比较差的，因为低层的改动会直接影响高层。这个时候我们需要引入中间抽象层，来达到解耦这种依赖强关联（在软件工程中，一直流传着这么一个<strong>武林秘笈</strong>：没有通过加中间层解决不了的问题😄）</p>
+<p>首先我们引入一个中间抽象层：DbDriver接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DbDriver</span></span>&#123;</div><div class="line">  <span class="function">List&lt;User&gt; <span class="title">searchUsers</span><span class="params">()</span></span>;<span class="comment">//此处举例不是很恰当，因为不是所有的Driver都需要有这个方法，但是可以说明上述的问题</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于上面的接口有两个实现类分别是MysqlDriver和OracleDriver</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MysqlDriver</span> <span class="keyword">implements</span> <span class="title">DbDriver</span></span>&#123;</div><div class="line">  <span class="function">List&lt;User&gt; <span class="title">searchUsers</span><span class="params">()</span></span>;<span class="comment">//查询mysql数据库中user表所有用户记录</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OracleDriver</span> <span class="keyword">implements</span> <span class="title">DbDriver</span></span>&#123;</div><div class="line">  <span class="function">List&lt;User&gt; <span class="title">searchUsers</span><span class="params">()</span></span>;<span class="comment">//查询mysql数据库中user表所有用户记录</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们的UserService类需要改成如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">pulic <span class="class"><span class="keyword">class</span> <span class="title">UserService</span></span>&#123;</div><div class="line"></div><div class="line">  DbDriver dbDriver;<span class="comment">//需要改成oracle</span></div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">(DbDriver dbDriver)</span></span>&#123;<span class="comment">//参数需要改成oracle</span></div><div class="line">    <span class="keyword">this</span>.dbDriver = dbDriver;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDriver</span><span class="params">(DbDriver dbDriver)</span></span>&#123;</div><div class="line">    <span class="keyword">this</span>.dbDriver = dbDriver;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingWithUser</span><span class="params">()</span></span>&#123;</div><div class="line">    List&lt;User&gt; users = dbDriver.searchUsers();</div><div class="line">    <span class="comment">//处理users</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是分别使用Mysql和Oracle来执行查询user操作的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">UserService = <span class="keyword">new</span> UserService();</div><div class="line"></div><div class="line"><span class="comment">//Mysql查询</span></div><div class="line">MysqlDriver mysqlDriver = <span class="keyword">new</span> MySqlDriver();</div><div class="line">userService.setDriver(mysqlDriver);</div><div class="line">userService.doSomethingWithUser();</div><div class="line"></div><div class="line"><span class="comment">//Oracle查询</span></div><div class="line">OracelDriver oracleDriver = <span class="keyword">new</span> OracleDriver();</div><div class="line">userService.setDriver(oracleDriver);</div><div class="line">userService.doSomethingWithUser();</div></pre></td></tr></table></figure>
+<p>如果你还需要使用其他数据库做同样的操作，只需要XXDriver实现DbDriver便可，而UserService可以不做任何改动。这就大大提高了高层的模块的可复用能里。</p>
+<p>未完待续。。。</p>
 
       
     </div>
@@ -335,7 +349,7 @@
 </a>
 
  
-    <a href="/2017/08/04/ThinkingInJava_Exception/#comments" title="Comments">
+    <a href="/2017/08/04/ThinkingInJava_Exception/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -464,7 +478,7 @@
 </a>
 
  
-    <a href="/2017/07/30/java-exceprion-limit-rule/#comments" title="Comments">
+    <a href="/2017/07/30/java-exceprion-limit-rule/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -546,7 +560,7 @@
 </a>
 
  
-    <a href="/2017/06/09/categories_ Business/#comments" title="Comments">
+    <a href="/2017/06/09/categories_ Business/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -657,7 +671,7 @@
 </a>
 
  
-    <a href="/2017/06/07/java-init/#comments" title="Comments">
+    <a href="/2017/06/07/java-init/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -741,7 +755,7 @@
 </a>
 
  
-    <a href="/2017/05/04/owncloud-install/#comments" title="Comments">
+    <a href="/2017/05/04/owncloud-install/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -833,7 +847,7 @@
 </a>
 
  
-    <a href="/2017/05/01/ssmgr-plan/#comments" title="Comments">
+    <a href="/2017/05/01/ssmgr-plan/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -897,7 +911,7 @@
 </a>
 
  
-    <a href="/2017/03/02/spring-1/#comments" title="Comments">
+    <a href="/2017/03/02/spring-1/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -971,7 +985,7 @@
 </a>
 
  
-    <a href="/2017/02/27/emacs-install/#comments" title="Comments">
+    <a href="/2017/02/27/emacs-install/#comments" title="查看评论">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -1069,14 +1083,14 @@
                 2017 王瑞飞
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -1085,7 +1099,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -1143,9 +1157,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
