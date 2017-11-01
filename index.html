@@ -140,13 +140,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>菜單</li>
+                        <li>標籤</li>
                         
-                        <li>友情链接</li>
+                        <li>友情鏈接</li>
                         
                         
-                        <li>关于我</li>
+                        <li>關於我</li>
                         
                     </ul>
                 </div>
@@ -185,7 +185,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/">DI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java编程思想/">java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/">DI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java编程思想/">java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li></ul>
                     </div>
                 </section>
                 
@@ -258,9 +258,107 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="標籤" friends="友情鏈接" about="關於我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-java_string" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/01/java_string/" class="article-date">
+      <time datetime="2017-11-01T08:53:46.000Z" itemprop="datePublished">2017-11-01</time>
+</a>
+
+ 
+    <a href="/2017/11/01/java_string/#comments" title="查看評論">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count"  data-thread-key="2017/11/01/java_string/" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/01/java_string/">Java基本对象解析(String)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>  String类型平时经常在用，但是往往越是熟悉的对象，越是忽视它背后的实现。就像空气和水，太平常，以至于忽视它的存在。</p>
+<h2 id="String类结构（部分）"><a href="#String类结构（部分）" class="headerlink" title="String类结构（部分）"></a>String类结构（部分）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></div><div class="line">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> &#123;</div><div class="line">    <span class="comment">/** The value is used for character storage. */</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];</div><div class="line"></div><div class="line">    <span class="comment">/** Cache the hash code for the string */</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> hash; <span class="comment">// Default to 0</span></div><div class="line"></div><div class="line">    <span class="comment">/** use serialVersionUID from JDK 1.0.2 for interoperability */</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">6849794470754667710L</span>;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">char</span> value[])</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.value = Arrays.copyOf(value, value.length);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由上述结构可知：<br>String类实现了Seriable，Comparable<string>, CharSequence 接口。重点在于CharSequence，该接口为不同Char类型序列提供了统一的，只读的访问。String类中有一个final成员变量char value[]. 它是String类型里字符串真正存储所在的容器。</string></p>
+<p>比如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s = <span class="keyword">new</span> String(<span class="string">"hello World"</span>);</div></pre></td></tr></table></figure></p>
+<p>这个初始化操作实际是调用了Arrays类中的copy方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">char</span>[] copyOf(<span class="keyword">char</span>[] original, <span class="keyword">int</span> newLength) &#123;</div><div class="line">    <span class="keyword">char</span>[] copy = <span class="keyword">new</span> <span class="keyword">char</span>[newLength];</div><div class="line">    System.arraycopy(original, <span class="number">0</span>, copy, <span class="number">0</span>,</div><div class="line">                     Math.min(original.length, newLength));</div><div class="line">    <span class="keyword">return</span> copy;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>即：分配一个char数组，并将”hello World”字面量值拷贝倒这个char数组中。<br>看到这里，有人会有疑惑吗？<br>既然新创建的char数组是拷贝自hello World，那么hello World存放在哪里？它也是一个String类型吗？如果是String类型，那它又是怎么被初始化的呢？用String类型初始化String类型，是不是感觉鸡生蛋，蛋生鸡？<br>对于这个问题我们暂时按下不表。继续往下看</p>
+<h2 id="Java-class文件及其结构"><a href="#Java-class文件及其结构" class="headerlink" title="Java class文件及其结构"></a>Java class文件及其结构</h2><p>首先我们都指导Java文件会被编译成.class文件，经过装载，被JVM解释执行。Class文件中除了有类的版本，字段，方法，接口等描述信息外，还有一项信息是常量池，用于存放编译器生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放。</p>
+<p>因此实际上“hello World”常量是存放在class文件的常量池中。<br>对于上面的的String初始化工作：</p>
+<ol>
+<li>编译期间，“hello World” 字面量存放在Class文件的常量池</li>
+<li>创建char数组分配内存，拷贝“hello World”到char数组</li>
+</ol>
+<p>这个时候实际上就有两个字符串，一个是常量池中的“hello World” 另一个是我们new出来的String对象，它的值为“hello World”。<br>其实在Java中我们称常量池中的字符串字面量为<strong>“拘留字符串”</strong></p>
+<h2 id="拘留字符串"><a href="#拘留字符串" class="headerlink" title="拘留字符串"></a>拘留字符串</h2><p>  我们来看代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="string">"hello World"</span>;</div><div class="line">String s2 = <span class="string">"hello World"</span>;</div><div class="line">System.out.println(s2==s1);</div></pre></td></tr></table></figure></p>
+<p>输出结果为：true<br>为什么？<br>这里就涉及到拘留（更倾向于理解为“保留”）的含义：<br>像“hello World”常量，它被保存在class文件中的常量池中，当String s1 = “hello World”时，实际上是将s1的引用指向hello World”所在地址。当String s2 = hello World”时，因为常量池中已经有了该常量，因此直接指向常量的地址，因此s1和s2是指向同一个对象的引用。</p>
+<p>再走一个代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="string">"hello World"</span>;</div><div class="line">String s2 = <span class="string">"hello World"</span>;</div><div class="line">System.out.println(s2==s1);</div><div class="line">s2 = s2 + <span class="string">"da sha bi"</span>;</div><div class="line">System.out.println(s2==s1);</div></pre></td></tr></table></figure></p>
+<p>输出结果是<br>ture<br>false<br>咦？上文不是说s1,s2指向同一个常量池中的“hello World”吗，为什么我改了其中的S2，为什么S1就不等同于S2呢？</p>
+<p>首先我们要理解的是String中的char[]是final类，其实无法变更该char数组的值。那么对于S2的“+”操作，实际是如何做的呢？<br>我们来看该类的反编译代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">Code:</div><div class="line">      0: ldc           #2                  // String hello World</div><div class="line">      2: astore_1</div><div class="line">      3: ldc           #2                  // String hello World</div><div class="line">      5: astore_2</div><div class="line">      6: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">      9: aload_2</div><div class="line">     10: aload_1</div><div class="line">     11: if_acmpne     18</div><div class="line">     14: iconst_1</div><div class="line">     15: goto          19</div><div class="line">     18: iconst_0</div><div class="line">     19: invokevirtual #4                  // Method java/io/PrintStream.println:(Z)V</div><div class="line">     22: new           #5                  // class java/lang/StringBuilder</div><div class="line">     25: dup</div><div class="line">     26: invokespecial #6                  // Method java/lang/StringBuilder."&lt;init&gt;":()V</div><div class="line">     29: aload_2</div><div class="line">     30: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</div><div class="line">     33: ldc           #8                  // String da sha bi</div><div class="line">     35: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</div><div class="line">     38: invokevirtual #9                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;</div><div class="line">     41: astore_2</div><div class="line">     42: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">     45: aload_2</div><div class="line">     46: aload_1</div><div class="line">     47: if_acmpne     54</div><div class="line">     50: iconst_1</div><div class="line">     51: goto          55</div><div class="line">     54: iconst_0</div><div class="line">     55: invokevirtual #4                  // Method java/io/PrintStream.println:(Z)V</div><div class="line">     58: return</div></pre></td></tr></table></figure></p>
+<p>重点看这几行：<br><img src="http://45.77.21.149:1234/owncloud/index.php/s/NTiGkt46BwNeVwd/download" alt="此处输入图片的描述"><br>可以看出String的“+”操作实际上new了一个StringBulider，然后通过StringBuilder的append方法进行拼接，最后调用toString方法返回String<br>换成代码其实实际执行的是这样子的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="string">"hello World"</span>;</div><div class="line">String s2 = <span class="string">"hello World"</span>;</div><div class="line">System.out.println(s2 == s1);</div><div class="line"><span class="comment">//s2 = s2 + "da sha bi";</span></div><div class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">System.out.println(sb.append(s2).append(<span class="string">"da sha bi"</span>).toString() == s1);</div></pre></td></tr></table></figure></p>
+<p>总结如下：<br>字符串变量与字符串常量的加法操作是通过StringBuider对象进行拼接<br>拼接的过程可以直接看StringBuild的append源码，这里大致表述<br>1.算出加上新字符串后的char数字大小，并new出该数组<br>2.拷贝字符串的char到新的char数组<br>3.原来的char数组会在GC回收时被清理</p>
+<p>再来一个一个代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String s3 = <span class="string">"hello"</span>+<span class="string">" world"</span>;</div></pre></td></tr></table></figure></p>
+<p>这个是怎么执行的呢？难道也是通过StringBuilder吗？<br>其实不是的，来看反编译代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Code:</div><div class="line">   0: ldc           #2                  // String hello world</div><div class="line">   2: astore_1</div><div class="line">   3: return</div></pre></td></tr></table></figure></p>
+<p>可知，直接就是在编译期间改为 String s3 = “hello world”,其中的”hello world”保存在class文件的常量池中</p>
+<p>我们再来看一个：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">String s3 = <span class="string">"hello"</span> + <span class="string">" world"</span>;</div><div class="line">String s4 = <span class="string">"hello world"</span>;</div><div class="line">System.out.println(s3 == s4);</div><div class="line"></div><div class="line">String s5 = <span class="string">"hello"</span>;</div><div class="line">String s6 = s5 + <span class="string">" world"</span>;</div><div class="line">System.out.println(s6 == s4);</div></pre></td></tr></table></figure></p>
+<p>输出结果为<br>true<br>false<br>其中s3和s4对象都是指向常量池中的“hello world”引用<br>而s6其实是new出来的一个对象，因此两个并不是同一个对象。</p>
+<p>本文结束，下文谈StringBuild和StringBuffer</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/String/">String</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-principleOfDi" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -270,7 +368,7 @@
 </a>
 
  
-    <a href="/2017/09/19/principleOfDi/#comments" title="查看评论">
+    <a href="/2017/09/19/principleOfDi/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -463,7 +561,7 @@
 </a>
 
  
-    <a href="/2017/08/04/ThinkingInJava_Exception/#comments" title="查看评论">
+    <a href="/2017/08/04/ThinkingInJava_Exception/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -592,7 +690,7 @@
 </a>
 
  
-    <a href="/2017/07/30/java-exceprion-limit-rule/#comments" title="查看评论">
+    <a href="/2017/07/30/java-exceprion-limit-rule/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -674,7 +772,7 @@
 </a>
 
  
-    <a href="/2017/06/09/categories_ Business/#comments" title="查看评论">
+    <a href="/2017/06/09/categories_ Business/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -785,7 +883,7 @@
 </a>
 
  
-    <a href="/2017/06/07/java-init/#comments" title="查看评论">
+    <a href="/2017/06/07/java-init/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -869,7 +967,7 @@
 </a>
 
  
-    <a href="/2017/05/04/owncloud-install/#comments" title="查看评论">
+    <a href="/2017/05/04/owncloud-install/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -961,7 +1059,7 @@
 </a>
 
  
-    <a href="/2017/03/02/spring-1/#comments" title="查看评论">
+    <a href="/2017/03/02/spring-1/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -1035,7 +1133,7 @@
 </a>
 
  
-    <a href="/2017/02/27/emacs-install/#comments" title="查看评论">
+    <a href="/2017/02/27/emacs-install/#comments" title="查看評論">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         <span class="count-comment"></span>
         
@@ -1133,14 +1231,14 @@
                 2017 王瑞飞
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、簡潔且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="簡而不減 Hexo 雙欄博客主題  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到訪數"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -1149,7 +1247,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="本頁閱讀量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -1207,9 +1305,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回頂部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看評論"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="轉到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
