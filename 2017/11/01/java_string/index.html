@@ -24,7 +24,8 @@ String类结构（部分）123456789101112131415public final class String    imp
 <meta property="og:description" content="String类型平时经常在用，但是往往越是熟悉的对象，越是忽视它背后的实现。就像空气和水，太平常，以至于忽视它的存在。
 String类结构（部分）123456789101112131415public final class String    implements java.io.Serializable, Comparable&amp;lt;String&amp;gt;, CharSequence &amp;#1">
 <meta property="og:image" content="http://45.77.21.149:1234/owncloud/index.php/s/NTiGkt46BwNeVwd/download">
-<meta property="og:updated_time" content="2017-11-01T09:29:33.000Z">
+<meta property="og:image" content="http://45.77.21.149:1234/owncloud/index.php/s/5daiOvcsbAuuiOm/download">
+<meta property="og:updated_time" content="2017-11-02T12:56:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基本对象解析(String)">
 <meta name="twitter:description" content="String类型平时经常在用，但是往往越是熟悉的对象，越是忽视它背后的实现。就像空气和水，太平常，以至于忽视它的存在。
@@ -141,13 +142,13 @@ String类结构（部分）123456789101112131415public final class String    imp
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -259,7 +260,7 @@ String类结构（部分）123456789101112131415public final class String    imp
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-java_string" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -330,7 +331,19 @@ String类结构（部分）123456789101112131415public final class String    imp
 <p>可知，直接就是在编译期间改为 String s3 = “hello world”,其中的”hello world”保存在class文件的常量池中</p>
 <p>我们再来看一个：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">String s3 = <span class="string">"hello"</span> + <span class="string">" world"</span>;</div><div class="line">String s4 = <span class="string">"hello world"</span>;</div><div class="line">System.out.println(s3 == s4);</div><div class="line"></div><div class="line">String s5 = <span class="string">"hello"</span>;</div><div class="line">String s6 = s5 + <span class="string">" world"</span>;</div><div class="line">System.out.println(s6 == s4);</div></pre></td></tr></table></figure></p>
 <p>输出结果为<br>true<br>false<br>其中s3和s4对象都是指向常量池中的“hello world”引用<br>而s6其实是new出来的一个对象，因此两个并不是同一个对象。</p>
-<p>本文结束，下文谈StringBuild和StringBuffer</p>
+<p>再最后走一个有趣的代码，为了看看你们是不是真的看明白了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="keyword">new</span> StringBuilder(  ).append( <span class="string">"hello "</span> ).append( <span class="string">"world"</span> ).toString();</div><div class="line">System.out.println(s1.intern() == s1);</div><div class="line"></div><div class="line"></div><div class="line">String s2 = <span class="keyword">new</span> StringBuilder(  ).append( <span class="string">"hello "</span> ).append( <span class="string">"world"</span> ).toString();</div><div class="line">System.out.println(s2.intern() == s2);</div></pre></td></tr></table></figure>
+<p>这个输出结果分别是什么呢？</p>
+<p>在JDK1.6中，结果为<br>false<br>false<br>而在jdk1.7以后为<br>true<br>false<br>为什么呢？<br>1.在JDK1.6中，intern()方法会把首次遇到的字符串复制到方法区的常量池中，返回的是方法区常量池中的字符串实例引用，而由StringBuilder创建的字符串实例是分配在java堆中，所以肯定不是同一个引用，故为false<br>2.在JDK1.7后，intern()方法不会再复制实例，只会在常量池中保存首次出现的实例的引用，所以s1.intern() == s1 是为true<br>而当String s2 = new StringBuilder(  ).append( “hello “ ).append( “world” ).toString();此时的s2是堆中又一个实例化的对象引用，s2.intern()是第一个实例化的引用所以不会相等<br>如果你试试System.out.println(s2.intern() == s1.intern());结果就是为true</p>
+<h2 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h2><p><img src="http://45.77.21.149:1234/owncloud/index.php/s/5daiOvcsbAuuiOm/download" alt="此处输入图片的描述"><br>StringBuilder扩展了抽象类AbstractStringBuilder</p>
+<p>类AbstractStringBuilder结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractStringBuilder</span> <span class="keyword">implements</span> <span class="title">Appendable</span>, <span class="title">CharSequence</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The value is used for character storage.</div><div class="line">     */</div><div class="line">    <span class="keyword">char</span>[] value;</div><div class="line"><span class="comment">//...................</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意对比String的类结构，String内部的char数组为final标签，而builder中的并不是final这也意味着Builder类是名副其实的用于”build” String的类（好像废话了。哈哈）</p>
+<p>StringBuilder类结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">StringBuilder</span></span></div><div class="line">    <span class="keyword">extends</span> <span class="title">AbstractStringBuilder</span></div><div class="line">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">CharSequence</span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="comment">/** use serialVersionUID for interoperability */</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">4383685877147921099L</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Constructs a string builder with no characters in it and an</div><div class="line">     * initial capacity of 16 characters.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringBuilder</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(<span class="number">16</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Constructs a string builder with no characters in it and an</div><div class="line">     * initial capacity specified by the &#123;<span class="doctag">@code</span> capacity&#125; argument.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>      capacity  the initial capacity.</div><div class="line">     * <span class="doctag">@throws</span>     NegativeArraySizeException  if the &#123;<span class="doctag">@code</span> capacity&#125;</div><div class="line">     *               argument is less than &#123;<span class="doctag">@code</span> 0&#125;.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringBuilder</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(capacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Constructs a string builder initialized to the contents of the</div><div class="line">     * specified string. The initial capacity of the string builder is</div><div class="line">     * &#123;<span class="doctag">@code</span> 16&#125; plus the length of the string argument.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>   str   the initial contents of the buffer.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringBuilder</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(str.length() + <span class="number">16</span>);</div><div class="line">        append(str);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>我们应该注意到StringBuilder的默认长度为16或者”16+目标字符串长度”。<br>再来看其中的append方法中当容量不够时申请的空间长度<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">newCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">      <span class="comment">// overflow-conscious code</span></div><div class="line">      <span class="keyword">int</span> newCapacity = (value.length &lt;&lt; <span class="number">1</span>) + <span class="number">2</span>;</div><div class="line">      <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>) &#123;</div><div class="line">          newCapacity = minCapacity;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> (newCapacity &lt;= <span class="number">0</span> || MAX_ARRAY_SIZE - newCapacity &lt; <span class="number">0</span>)</div><div class="line">          ? hugeCapacity(minCapacity)</div><div class="line">          : newCapacity;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>即：<br>1.扩增为原来长度的2倍+2<br>2.其长度可以超过最大MAX_ARRAY_SIZE，但是不能超过Int最大值</p>
+<p>为什么默认大小是16，不是32或者64，为什么容量不够时扩展为原来大小的2倍+2<br>个人认为是基于效率的考虑。<br>假设默认大小为0，那么一旦进行append操作就需要进行容量扩展，如果每次容量扩展只是增加到实际大小。那么下一次append必然还需要扩展大小，这样就会导致每次append操作都要进行容量的扩增，将旧数据拷贝的新数组这个过程，而这个过程是非常损耗性能的。<br>至于为什么是16不是32或64，估计就是java人员认为的一个比较合适的初始值吧。<br>而对于每次扩展为原来2倍的做法实际上和网络通信中的“拥塞控制”中对于滑动窗口的“指数增长”的做法有异曲同工之妙</p>
+<p>我们在来看一下StringBuffer<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">StringBuffer</span></span></div><div class="line">    <span class="keyword">extends</span> <span class="title">AbstractStringBuilder</span></div><div class="line">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">CharSequence</span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * A cache of the last value returned by toString. Cleared</div><div class="line">     * whenever the StringBuffer is modified.</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">char</span>[] toStringCache;</div><div class="line"></div><div class="line">    <span class="comment">/** use serialVersionUID from JDK 1.0.2 for interoperability */</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">3388685877147921107L</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(<span class="number">16</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(capacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(str.length() + <span class="number">16</span>);</div><div class="line">        append(str);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Constructs a string buffer that contains the same characters</div><div class="line">     * as the specified &#123;<span class="doctag">@code</span> CharSequence&#125;. The initial capacity of</div><div class="line">     * the string buffer is &#123;<span class="doctag">@code</span> 16&#125; plus the length of the</div><div class="line">     * &#123;<span class="doctag">@code</span> CharSequence&#125; argument.</div><div class="line">     * &lt;p&gt;</div><div class="line">     * If the length of the specified &#123;<span class="doctag">@code</span> CharSequence&#125; is</div><div class="line">     * less than or equal to zero, then an empty buffer of capacity</div><div class="line">     * &#123;<span class="doctag">@code</span> 16&#125; is returned.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>      seq   the sequence to copy.</div><div class="line">     * <span class="doctag">@since</span> 1.5</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span><span class="params">(CharSequence seq)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(seq.length() + <span class="number">16</span>);</div><div class="line">        append(seq);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> count;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">capacity</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> value.length;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.ensureCapacity(minimumCapacity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@since</span>      1.5</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">trimToSize</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.trimToSize();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//.......................</span></div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>StringBuffer类方法和StringBuilder基本一致，差别在于将每个方法名前加了“synchronized”同步控制，因此StringBuffer是<strong>线程安全</strong>的</p>
 
       
     </div>
@@ -339,17 +352,17 @@ String类结构（部分）123456789101112131415public final class String    imp
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/11/01/java_string/">Java基本对象解析(String)</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
-        <p><span>发布时间:</span>2017-11-01, 16:53:46</p>
-        <p><span>最后更新:</span>2017-11-01, 17:29:33</p>
+        <p><span>Title:</span><a href="/2017/11/01/java_string/">Java基本对象解析(String)</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">王瑞飞</a></p>
+        <p><span>Created:</span>2017-11-01, 16:53:46</p>
+        <p><span>Updated:</span>2017-11-02, 20:56:44</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/11/01/java_string/" title="Java基本对象解析(String)">wangruifei.github.io/2017/11/01/java_string/</a>
-            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/11/01/java_string/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2017/11/01/java_string/" title="Java基本对象解析(String)">wangruifei.github.io/2017/11/01/java_string/</a>
+            <span class="copy-path" data-clipboard-text="From wangruifei.github.io/2017/11/01/java_string/　　By 王瑞飞" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
@@ -370,9 +383,9 @@ String类结构（部分）123456789101112131415public final class String    imp
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String类结构（部分）"><span class="toc-number">1.</span> <span class="toc-text">String类结构（部分）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-class文件及其结构"><span class="toc-number">2.</span> <span class="toc-text">Java class文件及其结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拘留字符串"><span class="toc-number">3.</span> <span class="toc-text">拘留字符串</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String类结构（部分）"><span class="toc-number">1.</span> <span class="toc-text">String类结构（部分）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java-class文件及其结构"><span class="toc-number">2.</span> <span class="toc-text">Java class文件及其结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拘留字符串"><span class="toc-number">3.</span> <span class="toc-text">拘留字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringBuilder"><span class="toc-number">4.</span> <span class="toc-text">StringBuilder</span></a></li></ol>
         
     </div>
     <style>
@@ -386,10 +399,10 @@ String类结构（部分）123456789101112131415public final class String    imp
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -447,13 +460,13 @@ String类结构（部分）123456789101112131415public final class String    imp
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/09/19/principleOfDi/" title="下一篇: Spring的DI原理详解">
+            <a href="/2017/09/19/principleOfDi/" title="Next: Spring的DI原理详解">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -476,14 +489,14 @@ String类结构（部分）123456789101112131415public final class String    imp
                 2017 王瑞飞
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -492,7 +505,7 @@ String类结构（部分）123456789101112131415public final class String    imp
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -525,9 +538,9 @@ String类结构（部分）123456789101112131415public final class String    imp
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
