@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="王瑞飞" />
+
+
+
+<meta name="description" content="#Map容器概览标准Java类库包含了Map的几种基本实现，包括HashMap,TreeMap,LinkedHashMap,WeakHashMap,ConcurrentHashMap,IdentityHashMap.他们都有同样的基本接口Map，但是行为特性各不相同，主要表现在效率，键值对的保存和呈现的次序、对象保存的周期、映射表如何在多线程程序中工作和判定“键”等价的策略等方面。
+
+
+
+容器名称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Map的深入理解">
+<meta property="og:url" content="wangruifei.github.io/2017/11/03/java_map_1/index.html">
+<meta property="og:site_name" content="王瑞飞">
+<meta property="og:description" content="#Map容器概览标准Java类库包含了Map的几种基本实现，包括HashMap,TreeMap,LinkedHashMap,WeakHashMap,ConcurrentHashMap,IdentityHashMap.他们都有同样的基本接口Map，但是行为特性各不相同，主要表现在效率，键值对的保存和呈现的次序、对象保存的周期、映射表如何在多线程程序中工作和判定“键”等价的策略等方面。
+
+
+
+容器名称">
+<meta property="og:updated_time" content="2017-11-04T09:21:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Map的深入理解">
+<meta name="twitter:description" content="#Map容器概览标准Java类库包含了Map的几种基本实现，包括HashMap,TreeMap,LinkedHashMap,WeakHashMap,ConcurrentHashMap,IdentityHashMap.他们都有同样的基本接口Map，但是行为特性各不相同，主要表现在效率，键值对的保存和呈现的次序、对象保存的周期、映射表如何在多线程程序中工作和判定“键”等价的策略等方面。
+
+
+
+容器名称">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="王瑞飞" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Map的深入理解 | 王瑞飞</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://45.77.21.149:1234/owncloud/index.php/s/m0baVZ3ke9pv4f3/download" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">王瑞飞</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:happywangruifei@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/belovedBoy/home" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/wangruifei" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/">DI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java编程思想/">java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.hdu.edu.cn">杭州电子科大</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">西天取经的猪八戒</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">王瑞飞</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://45.77.21.149:1234/owncloud/index.php/s/m0baVZ3ke9pv4f3/download" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">王瑞飞</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:happywangruifei@gmail.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/belovedBoy/home" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/wangruifei" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-java_map_1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/03/java_map_1/" class="article-date">
+      <time datetime="2017-11-03T08:53:46.000Z" itemprop="datePublished">2017-11-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Map的深入理解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>#Map容器概览<br>标准Java类库包含了Map的几种基本实现，包括HashMap,TreeMap,LinkedHashMap,WeakHashMap,ConcurrentHashMap,IdentityHashMap.他们都有同样的基本接口Map，但是行为特性各不相同，主要表现在效率，键值对的保存和呈现的次序、对象保存的周期、映射表如何在多线程程序中工作和判定“键”等价的策略等方面。</p>
+<table>
+<thead>
+<tr>
+<th>容器名称</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HashMap*</td>
+<td>Map基于散列表的实现（它取代了HashTable）。插入和查询“键值对”的开销是固定的。可以通过构造器设置容器和负载因子，以调整容器的性能</td>
+</tr>
+<tr>
+<td>LinkedHashMap</td>
+<td>类似于HashMap，但是迭代遍历时，取得“键值对”的顺序是其插入次序，或者是最近最少使用（LRU）的次序。只比HashMap慢一点；而在迭代访问时反而更快，因为它使用链表维护内部次序</td>
+</tr>
+<tr>
+<td>TreeMap</td>
+<td>基于红黑树的实现。查看“键”或“键值对”时，它们会被排序（次序由Comparable或Comparator决定）。TreeMap的特点在于，所得到的结果是经过排序的。TreeMap是唯一带有subMap()方法的Map，它可以返回一个子树</td>
+</tr>
+<tr>
+<td>WeakHashMap</td>
+<td>弱键（weak key）映射，允许释放映射所指向的对象；这是为解决某类特殊问题而设计的。如果映射之外没有引用指向某个“键”，则此“键”可以被垃圾回收器回收</td>
+</tr>
+<tr>
+<td>ConcurrentHashMap</td>
+<td>一种线程安全的Map，它不涉及同步加锁。</td>
+</tr>
+<tr>
+<td>IdentityHashMap</td>
+<td>使用==代替equals()对“键”进行比较的散列映射。专为解决特殊问题而设计</td>
+</tr>
+</tbody>
+</table>
+<p>Map中使用的键值对进行key-value映射，任何key都必须具有一个equals()方法；如果key被用于散列Map，那么这个key必须要具有恰当的hashCode()方法;如果key被用于treeMap，那它还需要实现Comparable接口</p>
+<h2 id="hashCode-和-equals-的关系"><a href="#hashCode-和-equals-的关系" class="headerlink" title="hashCode() 和 equals() 的关系"></a>hashCode() 和 equals() 的关系</h2><p>来看一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Groudhog</span> </span>&#123;</div><div class="line">  <span class="keyword">protected</span> <span class="keyword">int</span> number;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Groudhog</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">    number = n;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"Groudhog #"</span> + number;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">       HashMap&lt;Groudhog,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">           Groudhog g = <span class="keyword">new</span> Groudhog(i);</div><div class="line">           map.put(g,i);</div><div class="line">           Groudhog g2 = <span class="keyword">new</span> Groudhog(<span class="number">3</span>);</div><div class="line">           System.out.println(map.containsKey(g2));</div><div class="line">       &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>输出结果为：<br>false<br>false<br>false<br>false<br>false<br>false<br>false<br>false<br>false<br>false</p>
+<p>为什么都是false呢？为什么找不到数字3这个key？<br>我们来看看map.containsKey()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">containsKey</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getNode(hash(key), key) != <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">final</span> Node&lt;K,V&gt; <span class="title">getNode</span><span class="params">(<span class="keyword">int</span> hash, Object key)</span> </span>&#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; <span class="keyword">int</span> n; K k;</div><div class="line">        <span class="keyword">if</span> ((tab = table) != <span class="keyword">null</span> &amp;&amp; (n = tab.length) &gt; <span class="number">0</span> &amp;&amp;</div><div class="line">            (first = tab[(n - <span class="number">1</span>) &amp; hash]) != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (first.hash == hash &amp;&amp; <span class="comment">// always check first node</span></div><div class="line">                ((k = first.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">                <span class="keyword">return</span> first;</div><div class="line">            <span class="keyword">if</span> ((e = first.next) != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (first <span class="keyword">instanceof</span> TreeNode)</div><div class="line">                    <span class="keyword">return</span> ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">                <span class="keyword">do</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</div><div class="line">                        <span class="keyword">return</span> e;</div><div class="line">                &#125; <span class="keyword">while</span> ((e = e.next) != <span class="keyword">null</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>由上面的getNode方法可以看出，需要先算出key对应的hashcode，<br>如果该hashcode查找不到，说明不含这个key<br>如果该hashcode存在，并不代表一定存在这个key，还要通过该对象的的equals方法判断是否相等。</p>
+<p>因此我们问题也就找到了，我们作为key的Groudhog对象的hashcode是多少？equals()方法又是如何判断的？</p>
+<p>因为任何对象都是从Object对象继承而来，而Object的hashCode方法的源码注释为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> * As much as is reasonably practical, the hashCode method defined by</div><div class="line"> * class &#123;@code Object&#125; does return distinct integers for distinct</div><div class="line"> * objects. (This is typically implemented by converting the internal</div><div class="line"> * address of the object into an integer, but this implementation</div><div class="line"> * technique is not required by the</div><div class="line"> * Java&amp;trade; programming language.)</div><div class="line"> *</div><div class="line"> * @return  a hash code value for this object.</div><div class="line"> * @see     java.lang.Object#equals(java.lang.Object)</div><div class="line"> * @see     java.lang.System#identityHashCode</div><div class="line"> */</div><div class="line">public native int hashCode();</div></pre></td></tr></table></figure></p>
+<p>因为它不是用java实现的，所以我们看不到源码，但是从注释可以看出Object对象计算hashCode是通过对象的地址计算得到的。Groundhog(3)生成的第一个实例和第二个实例因为是不同对象，因此计算得到的hashCode也就不相同，而我们在put的时候用的是第一个实例地址计算得到的hascode，在获取和判断的时候，用的是第二个实例地址计算得到的hashcode因此会发生错误。</p>
+<p>为了达到我们用含有相同number的Groundhog对象能取到相同的value，因此我们需要在Groundhog对象中覆写hashCode()方法。就这样就好了吗？<br>还不够！<br>我们需要同时覆写equals()方法，正如上文分析的，当hashCode相同时，还需要判断两个对象是否equals，而Object默认的equals()方法是判断两个对象的内存地址是否一致。</p>
+<p>因此Groundhog方法添加hashCode和equals方法后的代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Groudhog</span> </span>&#123;</div><div class="line">  <span class="keyword">protected</span> <span class="keyword">int</span> number;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Groudhog</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">    number = n;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"Groudhog #"</span> + number;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> number;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> o <span class="keyword">instanceof</span> Groudhog &amp;&amp; (number == ((Groudhog)o).number);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>总结：<br>使用自己的类作为HashMap的键时，覆写hashCode()时需要同时覆写equals()方法，其中equals()必须满足下列5个条件：</p>
+<ol>
+<li>自反性。对任意x, x.equals(x) 一定返回true</li>
+<li>对称性。对于任意的x,y，如果y.equals(x)返回true,则x.equals(y)也返回true</li>
+<li>传递性。对于任意的x,y,z, 如果有x.equals(y)返回true，y.equals(z)返回true，则x.equals(z)一定返回true</li>
+<li>一致性。对于任意x和y，如果对象中用于等价比较的信息没有改变，那么无论调用多少次x.equals(y)，返回的结果应该保持一致而不发生变化。</li>
+<li>对于任意不是null的x，x.equals(null)一定返回false</li>
+</ol>
+<h3 id="如何编写合理的hashCode"><a href="#如何编写合理的hashCode" class="headerlink" title="如何编写合理的hashCode()"></a>如何编写合理的hashCode()</h3><p>总体原则：</p>
+<ol>
+<li>无论何时，对同一个对象调用hashCode()都应该生成同样的值。如果进行put时添加进HashMap时产生一个hashCode()值，而用get()取出时却产生另一个hashCode()值，那么就无法重新获取该对象了。因此，若hashCode()方法依赖于对象中易变的数据，我们就要当心了，因为此数据发生变化时hashCode()就会生成一个不同的散列码，相当于产生了不同的key。</li>
+<li>hashCode()也不应该依赖于具有唯一性的对象信息，特别是使用this的值，它会导致很糟糕的hashCode()。</li>
+<li>hashCode()必须实用，并且必须有意义，散列码不必独一无二，然后生成的速度要尽可能快，通过hashCode()和equals()方法必须完全确定对象身份</li>
+<li>生成的hashCode应该分布均匀</li>
+<li>检查hashCode()确保相同对象有相同的值</li>
+</ol>
+<p>在Effective Java Programming Language Guide 一书中给出了合理hashCode()的设计指导。<br>| 类型f | 合理的hash值c |<br>| —- | —- |<br>| boolean | c = (f ? 0 : 1) 在java源码中其实为c = (f ? 1231 : 1237) |<br>| byte,char,short,int | c = (int)f |<br>| long | (int)(f ^ (f &gt;&gt;&gt; 32)) |<br>| float | floatToIntBits(value) |<br>| double | long l = Double.doubleToLongBits(f); c = (int)(l^(l&gt;&gt;&gt;32)) |</p>
+<p>对于含有上述多个类型的对象，可以合并计算hash和 result = result * 37 + c<br>上面的实现实际已经在java中使用，可以直接调用。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/11/03/java_map_1/">Map的深入理解</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
+        <p><span>发布时间:</span>2017-11-03, 16:53:46</p>
+        <p><span>最后更新:</span>2017-11-04, 17:21:10</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/03/java_map_1/" title="Map的深入理解">wangruifei.github.io/2017/11/03/java_map_1/</a>
+            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/11/03/java_map_1/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/11/01/java_string/">
+                    Java基本对象解析(String)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hashCode-和-equals-的关系"><span class="toc-number">1.</span> <span class="toc-text">hashCode() 和 equals() 的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何编写合理的hashCode"><span class="toc-number">1.1.</span> <span class="toc-text">如何编写合理的hashCode()</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Map的深入理解　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/11/03/java_map_1/" data-title="Map的深入理解" data-url="wangruifei.github.io/2017/11/03/java_map_1/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"wangruifei"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/11/01/java_string/" title="下一篇: Java基本对象解析(String)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/03/java_map_1/">Map的深入理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/java_string/">Java基本对象解析(String)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/19/principleOfDi/">Spring的DI原理详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/ThinkingInJava_Exception/">Java异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/java-exceprion-limit-rule/">异常的限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/categories_ Business/">Guide to Woodome VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/java-init/">Java--初始化</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/owncloud-install/">owncloud搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/spring-1/">spring学习小结-第一章</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/emacs-install/">Emacs-Install</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017 王瑞飞
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
