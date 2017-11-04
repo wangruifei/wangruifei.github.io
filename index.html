@@ -290,7 +290,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/03/java_map_1/">Map的深入理解(一：概览)</a>
+      <a class="article-title" href="/2017/11/03/java_map_1/">Map的深入理解</a>
     </h1>
   
 
@@ -363,7 +363,37 @@
 <li>生成的hashCode应该分布均匀</li>
 <li>检查hashCode()确保相同对象有相同的值</li>
 </ol>
-<p>在Effective Java Programming Language Guide 一书中给出了合理hashCode()的设计指导。<br>| 类型f | 合理的hash值c |<br>| —- | —- |<br>| boolean | c = (f ? 0 : 1) 在java源码中其实为c = (f ? 1231 : 1237) |<br>| byte,char,short,int | c = (int)f |<br>| long | (int)(f ^ (f &gt;&gt;&gt; 32)) |<br>| float | floatToIntBits(value) |<br>| double | long l = Double.doubleToLongBits(f); c = (int)(l^(l&gt;&gt;&gt;32)) |</p>
+<p>在Effective Java Programming Language Guide 一书中给出了合理hashCode()的设计指导。</p>
+<table>
+<thead>
+<tr>
+<th>类型f</th>
+<th>合理的hash值c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>c = (f ? 0 : 1) 在java源码中其实为c = (f ? 1231 : 1237)</td>
+</tr>
+<tr>
+<td>byte,char,short,int</td>
+<td>c = (int)f</td>
+</tr>
+<tr>
+<td>long</td>
+<td>(int)(f ^ (f &gt;&gt;&gt; 32))</td>
+</tr>
+<tr>
+<td>float</td>
+<td>floatToIntBits(value)</td>
+</tr>
+<tr>
+<td>double</td>
+<td>long l = Double.doubleToLongBits(f); c = (int)(l^(l&gt;&gt;&gt;32))</td>
+</tr>
+</tbody>
+</table>
 <p>对于含有上述多个类型的对象，可以合并计算hash和 result = result * 37 + c<br>上面的实现实际已经在java中使用，可以直接调用。</p>
 
       

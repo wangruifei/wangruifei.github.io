@@ -21,7 +21,7 @@
 
 容器名称">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Map的深入理解(一：概览)">
+<meta property="og:title" content="Map的深入理解">
 <meta property="og:url" content="wangruifei.github.io/2017/11/03/java_map_1/index.html">
 <meta property="og:site_name" content="王瑞飞">
 <meta property="og:description" content="Map容器概览标准Java类库包含了Map的几种基本实现，包括HashMap,TreeMap,LinkedHashMap,WeakHashMap,ConcurrentHashMap,IdentityHashMap.他们都有同样的基本接口Map，但是行为特性各不相同，主要表现在效率，键值对的保存和呈现的次序、对象保存的周期、映射表如何在多线程程序中工作和判定“键”等价的策略等方面。
@@ -29,9 +29,9 @@
 
 
 容器名称">
-<meta property="og:updated_time" content="2017-11-04T09:24:25.000Z">
+<meta property="og:updated_time" content="2017-11-04T09:28:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Map的深入理解(一：概览)">
+<meta name="twitter:title" content="Map的深入理解">
 <meta name="twitter:description" content="Map容器概览标准Java类库包含了Map的几种基本实现，包括HashMap,TreeMap,LinkedHashMap,WeakHashMap,ConcurrentHashMap,IdentityHashMap.他们都有同样的基本接口Map，但是行为特性各不相同，主要表现在效率，键值对的保存和呈现的次序、对象保存的周期、映射表如何在多线程程序中工作和判定“键”等价的策略等方面。
 
 
@@ -68,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Map的深入理解(一：概览) | 王瑞飞</title>
+<title>Map的深入理解 | 王瑞飞</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -287,7 +287,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Map的深入理解(一：概览)
+      Map的深入理解
     </h1>
   
 
@@ -375,7 +375,37 @@
 <li>生成的hashCode应该分布均匀</li>
 <li>检查hashCode()确保相同对象有相同的值</li>
 </ol>
-<p>在Effective Java Programming Language Guide 一书中给出了合理hashCode()的设计指导。<br>| 类型f | 合理的hash值c |<br>| —- | —- |<br>| boolean | c = (f ? 0 : 1) 在java源码中其实为c = (f ? 1231 : 1237) |<br>| byte,char,short,int | c = (int)f |<br>| long | (int)(f ^ (f &gt;&gt;&gt; 32)) |<br>| float | floatToIntBits(value) |<br>| double | long l = Double.doubleToLongBits(f); c = (int)(l^(l&gt;&gt;&gt;32)) |</p>
+<p>在Effective Java Programming Language Guide 一书中给出了合理hashCode()的设计指导。</p>
+<table>
+<thead>
+<tr>
+<th>类型f</th>
+<th>合理的hash值c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>c = (f ? 0 : 1) 在java源码中其实为c = (f ? 1231 : 1237)</td>
+</tr>
+<tr>
+<td>byte,char,short,int</td>
+<td>c = (int)f</td>
+</tr>
+<tr>
+<td>long</td>
+<td>(int)(f ^ (f &gt;&gt;&gt; 32))</td>
+</tr>
+<tr>
+<td>float</td>
+<td>floatToIntBits(value)</td>
+</tr>
+<tr>
+<td>double</td>
+<td>long l = Double.doubleToLongBits(f); c = (int)(l^(l&gt;&gt;&gt;32))</td>
+</tr>
+</tbody>
+</table>
 <p>对于含有上述多个类型的对象，可以合并计算hash和 result = result * 37 + c<br>上面的实现实际已经在java中使用，可以直接调用。</p>
 
       
@@ -385,12 +415,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/11/03/java_map_1/">Map的深入理解(一：概览)</a></p>
+        <p><span>本文标题:</span><a href="/2017/11/03/java_map_1/">Map的深入理解</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
         <p><span>发布时间:</span>2017-11-03, 16:53:46</p>
-        <p><span>最后更新:</span>2017-11-04, 17:24:25</p>
+        <p><span>最后更新:</span>2017-11-04, 17:28:30</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/11/03/java_map_1/" title="Map的深入理解(一：概览)">wangruifei.github.io/2017/11/03/java_map_1/</a>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/03/java_map_1/" title="Map的深入理解">wangruifei.github.io/2017/11/03/java_map_1/</a>
             <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/11/03/java_map_1/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -454,7 +484,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Map的深入理解(一：概览)　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Map的深入理解　| 王瑞飞　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -470,7 +500,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/11/03/java_map_1/" data-title="Map的深入理解(一：概览)" data-url="wangruifei.github.io/2017/11/03/java_map_1/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/11/03/java_map_1/" data-title="Map的深入理解" data-url="wangruifei.github.io/2017/11/03/java_map_1/"></div>
     <script>
         var duoshuoQuery = {short_name:"wangruifei"};
         var loadComment = function(){
@@ -505,7 +535,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/03/java_map_1/">Map的深入理解(一：概览)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/java_string/">Java基本对象解析(String)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/19/principleOfDi/">Spring的DI原理详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/ThinkingInJava_Exception/">Java异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/java-exceprion-limit-rule/">异常的限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/categories_ Business/">Guide to Woodome VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/java-init/">Java--初始化</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/owncloud-install/">owncloud搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/spring-1/">spring学习小结-第一章</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/emacs-install/">Emacs-Install</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/03/java_map_1/">Map的深入理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/01/java_string/">Java基本对象解析(String)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/19/principleOfDi/">Spring的DI原理详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/ThinkingInJava_Exception/">Java异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/java-exceprion-limit-rule/">异常的限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/09/categories_ Business/">Guide to Woodome VPN</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/07/java-init/">Java--初始化</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/04/owncloud-install/">owncloud搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/spring-1/">spring学习小结-第一章</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/emacs-install/">Emacs-Install</a></li></ul>
 
 
 
