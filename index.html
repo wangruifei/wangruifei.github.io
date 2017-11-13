@@ -140,13 +140,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>菜單</li>
+                        <li>標籤</li>
                         
-                        <li>友情链接</li>
+                        <li>友情鏈接</li>
                         
                         
-                        <li>关于我</li>
+                        <li>關於我</li>
                         
                     </ul>
                 </div>
@@ -185,7 +185,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/">DI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java编程思想/">java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DI/">DI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java编程思想/">java编程思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器/">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发编程/">并发编程</a></li></ul>
                     </div>
                 </section>
                 
@@ -258,9 +258,112 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="標籤" friends="友情鏈接" about="關於我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-java_concurrent_volatile_sychronized" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/09/java_concurrent_volatile_sychronized/" class="article-date">
+      <time datetime="2017-11-09T08:53:46.000Z" itemprop="datePublished">2017-11-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/09/java_concurrent_volatile_sychronized/">Synchronized与volatile</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>今天我们要辨析的是多线程中经常会遇到的两个关键字：</p>
+<ul>
+<li>sychronized</li>
+<li>volatile</li>
+</ul>
+<p>当多线程场景下，对于共享资源的并发访问会导致“线程安全”问题，而影响线程安全的因素实际上归结为2个要点：<strong>互斥访问</strong>和<strong>可见性</strong>。当多线程环境同时保证了对共享资源的互斥和可见性时，就能保证“线程安全”</p>
+<p><strong>原子性</strong>：一个步骤或多个步骤，不可被拆分，流程不可被中断，要么全部执行，要么全部不执行。对于原子操作不允许发生时间片切换或者任务切换。</p>
+<p><strong>可见性</strong>：一个线程对共享资源的修改，对于其他线程来说是可见的。即其他线程能知道另外一个线程对某个共享变量做了修改。</p>
+<p><strong>互斥访问</strong>：多线程环境下，同一时间只允许同一个线程访问</p>
+<p><strong>临界区</strong>：互斥访问的代码块称为临界区</p>
+<p>1.保证原子操作一定是线程安全的吗？<br>否。假设有一个资源量，假设初始值为0，有两个线程将对该资源做加1操作。当读操作原子性时，两个线程<em>同时</em>都读到该值为0，并 <em>分别</em> 做加1操作，A线程完成加1操作后值为1，B线程完成加1操作后值也为1，这里产生的问题就在于两个线程一共做了2次加1操作，但是最后的结果却仍为1，而不是2. 问题就出在，两个线程对共享变量操作后的结果双方不可见，如果其中任意一个线程再做完加1操作后，其他线程都能看到该结果，那么就不会发生这种情况。<br>即：A线程做完加1操作后，B线程发现A做了加1操作，然后放弃自己刚才读取到的值0 而是重新读取新值1，再做加1操作那么就会得到正确结果<br>（注：对于多个原子操作的组合，这个组合不一定是原子的。比如：i++，实际上分为2步，先读取i的值，再对i做加1操作。读取i的值是原子操作，加1操作也是原子操作，但是i++操作并不是原子操作（也有可能是原子的，但不一定），它在两个步骤的中间，可以发生时间片切换（线程切换）。举个例子：当你的手伸向餐盘打算拿起一块面包时，突然面包不见了，变成了榴莲…因为在你拿的过程中，另一个人把它吃了，给你放上了榴莲…而你却看不到他 PS：本人最痛恨榴莲。如果要保证你在取面包的过程中没人能打扰，那么你可以在你房间加一个门，门口有一把钥匙，进门之前，你需要取下门口的钥匙，打开门，带着钥匙进去吃面包，吃完出房间关上门，然后把钥匙放回。）</p>
+<p>2.保证可见性，一定线程安全吗？<br>否。继续上面的例子。上面的操作时2个线程同时读取值，然后分别进行加1操作，这个时候，保证可见性,他们的最终结果是对的。但是，如果同时读取值，又同时操作，最后写到主存的结果还会1.<br>具体还需要结合Java内存模型进行学习，详细资料可以参考<a href="http://blog.csdn.net/muxiqingyang/article/details/6615199" target="_blank" rel="external">《大话处理器》Cache一致性协议之MESI</a>，非常推荐去阅读一下，看是如何在cpu不同核心之间的保持Cache的一致性</p>
+<h2 id="JAVA内存模型："><a href="#JAVA内存模型：" class="headerlink" title="JAVA内存模型："></a>JAVA内存模型：</h2><p>在现在的多核cpu中，每个核心都有自己的核内Cache，当线程执行时，先从主存读取数据到线程的工作内存，然后对线程的工作内存内的数据副本进行操作，该工作内存位于线程所在的核心的Cache中。处于性能的考虑，线程操作后的数据并不会立即写回到主存中。当其他线程从主存读取该贡献变量时，实际上读到的就是脏数据（实效数据）。<br>其结构图大概如下：(该图转载自:<a href="https://www.ziwenxie.site/2017/04/24/java-multithread-volatile/" target="_blank" rel="external">Java并发编程之volatile关键字解析</a>)<br><img src="http://45.77.21.149:1234/owncloud/index.php/s/PQlQN48u0ZhD7Fx/download" alt="java内存模型"></p>
+<p>需要注意的是，每个线程的工作内存（位于核内Cache）中的数据副本并不是说直接把主存的内容完全拷贝复制一份，而是保存其引用，对于其中用到的字段会进行复制拷贝。</p>
+<p>如何保证可见性：<br>当线程A和线程B读取了主存上的值v，同时存一个副本在线程内部的本地内存MA和本地内存MB，当线程A对MA内的副本进行修改后，则置本地副本的变量所在的内存为M（modify）标记，同时因为本地内存MB也有该副本，这个时候本地内存MB的该变量的所在内存被标记为I（Invalid）标记，当线程B对本地内存MB内的共享数据进行读取时，发现标记无效，则使本地内存MA上modify的数据写回主存，然后线程B再从内存中读取该值进行操作。为什么保证可见性仍然不能保证形成安全就在于，当线程A和线程B同时对本地内存进行操作时，因为这个时候两个线程内的数据都是原来的数据，双方已经一致，因此也可以同时进行操作，操作后同时提交到总线上进行cache之间的同步，这个时候就该协议就会失效。</p>
+<h2 id="java指令重排序"><a href="#java指令重排序" class="headerlink" title="java指令重排序"></a>java指令重排序</h2><p>网上有一篇个人感觉已经足够详细和浅显易懂的文章，所以此处不再赘述，请移步《<a href="http://blog.csdn.net/pzxwhc/article/details/48984209" target="_blank" rel="external">指令重排序</a>》</p>
+<p>前面铺垫了这么多，终于可以来说说volatile和sychronized了</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>当共享变量用关键字volatile标记后，该共享变量就会保证一下两个规则：</p>
+<ul>
+<li>保证多线程间共享变量的可见性</li>
+<li>局部禁止指令重排序，只针对被volatile标注的对象<br>1）当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作肯定还没有进行<br>2）在进行指令优化时，不能将在对volatile变量访问的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。<br>：<br>来看一段代码<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">线程A</div><div class="line"><span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</div><div class="line"><span class="keyword">while</span>(!stop)&#123;</div><div class="line">  doSomething();</div><div class="line">&#125;</div><div class="line"></div><div class="line">线程B</div><div class="line">stop = <span class="keyword">true</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上述代码存在一个问题，因为当线程B对stop赋值时，其最新结果可能仍然保存在线程的本地内存中，并未写回到主存，而同时，线程A中仍然保存着原来的旧数据，这将导致很长一段时间内，while循环将不断继续。<br>当对stop使用volaitle关键字以后，当线程B对stop进行修改，则stop的数据将立即写到主存，而线程A的本地缓存的数据也已经被置为失效，此时线程A再次读取stop时将重新冲主存中读取，那么就可以的到最新的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//x、y为非volatile变量</span></div><div class="line"><span class="comment">//flag为volatile变量</span></div><div class="line"> </div><div class="line">x = <span class="number">2</span>;        <span class="comment">//语句1</span></div><div class="line">y = <span class="number">0</span>;        <span class="comment">//语句2</span></div><div class="line">flag = <span class="keyword">true</span>;  <span class="comment">//语句3</span></div><div class="line">x = <span class="number">4</span>;         <span class="comment">//语句4</span></div><div class="line">y = -<span class="number">1</span>;       <span class="comment">//语句5</span></div></pre></td></tr></table></figure>
+<p>“由于flag变量为volatile变量，那么在进行指令重排序的过程的时候，不会将语句3放到语句1、语句2前面，也不会讲语句3放到语句4、语句5后面。但是要注意语句1和语句2的顺序、语句4和语句5的顺序是不作任何保证的。</p>
+<p>　　并且volatile关键字能保证，执行到语句3时，语句1和语句2必定是执行完毕了的，且语句1和语句2的执行结果对语句3、语句4、语句5是可见的。”（此例子引用自：<a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">Java并发编程：volatile关键字解析</a>） </p>
+<p>以下的代码段就会发生指令重排序导致的错误</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReorderExample</span> </span>&#123;</div><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line"><span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span> </span>&#123;</div><div class="line">    a = <span class="number">1</span>;                   <span class="comment">//1</span></div><div class="line">    flag = <span class="keyword">true</span>;             <span class="comment">//2</span></div><div class="line">&#125;</div><div class="line"><span class="function">Public <span class="keyword">void</span> <span class="title">reader</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (flag) &#123;                <span class="comment">//3</span></div><div class="line">        <span class="keyword">int</span> i =  a * a;        <span class="comment">//4</span></div><div class="line">        ……</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>假设有两个线程A，B，其中线程A执行Write操作，线程B执行Reader操作。由于在线程A的Write 方法中，先执行1，再执行2的结果和先执行2再执行1的结果对于线程A来说并没有任何不同。因此就有可能发生指令的重排序，导致先执行2再执行1 ，按照这个结果，当flag被置为true时，若线程A因时间片用完被挂起，线程B进行Reader操作，那么这个时候计算得到的i为0，而不是原本预计的1.<br>当对flag对象设置为volatile时，就可以避免</p>
+<p>因此volatile关键字可以用于指令的同步吗？可以用volite来保证线程安全吗？<br>并不一定能。请考虑前文提到的保证线程安全的两个要点：“互斥”和“可见性”。该关键字能保证可见性，但不保证互斥。</p>
+<h3 id="什么情况下使用volatile？"><a href="#什么情况下使用volatile？" class="headerlink" title="什么情况下使用volatile？"></a>什么情况下使用volatile？</h3><p>  当该关键字写操作由同一个线程完成时，可以。因为这个时候一个线程的写操作，避免了“竞态条件”的产生，其实暗藏了“互斥”。同时又由于具有可见性，因此此时可以用于保证线程安全</p>
+<h2 id="sychronized"><a href="#sychronized" class="headerlink" title="sychronized"></a>sychronized</h2><p>它在保证“可见性”的同时还提供了“互斥性”。而volatile是轻量级的“同步”，不能保证线程安全，约束更弱，而sychronized是强同步</p>
+<ul>
+<li>确保线程互斥访问同步代码块</li>
+<li>保证共享变量的修改可见</li>
+<li>解决重排序问题</li>
+</ul>
+<p>对于实现原理有兴趣的同学可以转到<a href="https://www.cnblogs.com/paddix/p/5367116.html" target="_blank" rel="external">sychronized原理</a></p>
+<p> 参考资料：<br><a href="http://blog.csdn.net/muxiqingyang/article/details/6615199" target="_blank" rel="external">《大话处理器》Cache一致性协议之MESI</a><br><a href="https://www.ziwenxie.site/2017/04/24/java-multithread-volatile/" target="_blank" rel="external">Java并发编程之volatile关键字解析</a><br><a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">Java并发编程：volatile关键字解析</a><br><a href="https://en.wikipedia.org/wiki/MESI_protocol" target="_blank" rel="external">MESI protocol—-From Wikipedia</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发编程/">并发编程</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-java_map_1" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1223,93 +1326,10 @@
 
 
   
-    <article id="post-emacs-install" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2017/02/27/emacs-install/" class="article-date">
-      <time datetime="2017-02-27T15:55:33.000Z" itemprop="datePublished">2017-02-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/emacs-install/">Emacs-Install</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>  1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.<br>  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。</p>
-<h2 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h2><p>由于emacs有terminal和GUI版本，一个是在命令行，一个是在图形界面，但是这两个其实没什么差别。因为在终端里展示的emacs和GUI的emacs布局和功能完全一样。因此你可以选择你需要的安装。我只安装了terminal下的emacs。同时用到了一个大神的emacs配置文件，因为原生的emacs不是和人性化，而这个大神的自定义配置非常好用。拿来主义主义，何乐不为？</p>
-<p>GUI版本下载地址：<a href="https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg" target="_blank" rel="external">https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg</a><br>terminal版本安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install emacs --with-cocoa</div></pre></td></tr></table></figure>
-<p>安装这emacs后下面就可以开始配置emacs了。这个配置文件的相关源码可以在github上找到<a href="https://github.com/purcell/emacs.d" target="_blank" rel="external">https://github.com/purcell/emacs.d</a></p>
-<h3 id="安装配置文件"><a href="#安装配置文件" class="headerlink" title="安装配置文件"></a>安装配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/purcell/emacs.d.git ~/.emacs.d</div></pre></td></tr></table></figure>
-<p>如果提示文件夹.emacs.d已存在，去删掉这个文件夹然后重新执行这条命令就可以了</p>
-<h3 id="启动emacs，验证配置生效"><a href="#启动emacs，验证配置生效" class="headerlink" title="启动emacs，验证配置生效"></a>启动emacs，验证配置生效</h3><p>1.在图形界面启动直接去application中找到emacs双击启动就好<br>2.在Terminal下启动GUI emacs 输入命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open <span class="_">-a</span> emacs fileName</div></pre></td></tr></table></figure>
-<p>3.在terminal下启动terminal emacs 直接输入 emacs 即可</p>
-<p>第一次打开需要下载安装一些包会慢一些，等一段时间后可以看到这样一个界面,既配置成功</p>
-<p><img src="http://i1.piimg.com/586854/d562b791985690df.jpg" alt="emacs初始界面"></p>
-<h3 id="Mac键盘-M-x-按键调整"><a href="#Mac键盘-M-x-按键调整" class="headerlink" title="Mac键盘 M-x 按键调整"></a>Mac键盘 M-x 按键调整</h3><p>emacs需要经常使用到ctrl键和alt键，但是在mac键盘的默认配置中是没有alt按键的。此时需要对自己的键盘做调整。</p>
-<p>我是将左边的option按键当成alt按键<br>1.在terminal模式下，找到emacs的配置文件.emacs.d/init.el 加如下配置更改键盘</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(setq ns-right-alternate-modifier nil)</div></pre></td></tr></table></figure>
-<p>2.或者在term终端工具的“偏好设置”-“描述文件”-“键盘”，勾选“将option键作为Meta键”也可以</p>
-<p><img src="http://p1.bqimg.com/586854/adde48f934a56920.jpg" alt="终端修改按键"></p>
-<h3 id="到此emacs的基本配置就结束啦～～～～"><a href="#到此emacs的基本配置就结束啦～～～～" class="headerlink" title="到此emacs的基本配置就结束啦～～～～"></a>到此emacs的基本配置就结束啦～～～～</h3><h2 id="emacs中编译执行c-c"><a href="#emacs中编译执行c-c" class="headerlink" title="emacs中编译执行c++/c"></a>emacs中编译执行c++/c</h2><h4 id="1-emacs创建新文件helloWorld-cpp"><a href="#1-emacs创建新文件helloWorld-cpp" class="headerlink" title="1.emacs创建新文件helloWorld.cpp"></a>1.emacs创建新文件helloWorld.cpp</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">emacs helloWorld.cpp</div></pre></td></tr></table></figure>
-<p>此处需要知道，emacs代码是根据文件类型进行高亮的，如果你创建的文件叫helloWorld而不是helloWorld.cpp<br>那么很可能代码就没有高亮效果</p>
-<h4 id="2-编写最经典的helloworld程序"><a href="#2-编写最经典的helloworld程序" class="headerlink" title="2.编写最经典的helloworld程序"></a>2.编写最经典的helloworld程序</h4><p><img src="http://p1.bqimg.com/586854/c5661003303710d5.jpg" alt="helloWorld"></p>
-<h4 id="Meta-x-compile-进行编译（其中Meta-x-就是-alt-x按键）"><a href="#Meta-x-compile-进行编译（其中Meta-x-就是-alt-x按键）" class="headerlink" title="Meta-x compile 进行编译（其中Meta-x 就是 alt+x按键）"></a>Meta-x compile 进行编译（其中Meta-x 就是 alt+x按键）</h4><p>此处我用clang++ 进行编译</p>
-<p><img src="http://p1.bqimg.com/586854/67de1efd82cf5f48.jpg" alt="编译"></p>
-<h3 id="Meta-x-shell-启动shell执行编译后的输出文件a-out"><a href="#Meta-x-shell-启动shell执行编译后的输出文件a-out" class="headerlink" title="Meta+x shell 启动shell执行编译后的输出文件a.out"></a>Meta+x shell 启动shell执行编译后的输出文件a.out</h3><p><img src="http://p1.bqimg.com/586854/6a1cc503b282835c.jpg" alt="输出"></p>
-<p>自此，命令行下编写，编译，执行c／c++ 的开发环境就弄好了。配合着vim使用药效更佳。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/tool/">tool</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/emacs/">emacs</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
@@ -1320,14 +1340,14 @@
                 2017 王瑞飞
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、簡潔且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="簡而不減 Hexo 雙欄博客主題  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到訪數"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -1336,7 +1356,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="本頁閱讀量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -1373,9 +1393,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回頂部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看評論"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="轉到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window

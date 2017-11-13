@@ -14,11 +14,14 @@
 <meta name="author" content="王瑞飞" />
 
 
+    
+    
+
 
 <meta name="description" content="逗逼派来的猪八戒">
 <meta property="og:type" content="website">
 <meta property="og:title" content="王瑞飞">
-<meta property="og:url" content="wangruifei.github.io/archives/2017/11/index.html">
+<meta property="og:url" content="wangruifei.github.io/page/2/index.html">
 <meta property="og:site_name" content="王瑞飞">
 <meta property="og:description" content="逗逼派来的猪八戒">
 <meta name="twitter:card" content="summary">
@@ -51,11 +54,13 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
+    <style> .article { opacity: 0;} </style>
+
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives: 2017/11 | 王瑞飞</title>
+<title>王瑞飞</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -64,9 +69,9 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: false,
+        isHome: true,
         isPost: false,
-        isArchive: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -257,132 +262,98 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-emacs-install" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2017/02/27/emacs-install/" class="article-date">
+      <time datetime="2017-02-27T15:55:33.000Z" itemprop="datePublished">2017-02-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/27/emacs-install/">Emacs-Install</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>  1月份买了一个Macbook pro，本打算写一些简单的c++程序，但是自带的xcode真心大，好几个GB，而且安装出问题，弄的好不纯粹。于是开始入手emacs.<br>  为什么不用vim，是因为我只要写c++程序，emacs自带了很多我需要的功能，比如编译和高亮显示代码，虽然这个vim也可以。但是emacs自带就有这些功能也不需要去手动调整配置，我属于懒汉。</p>
+<h2 id="Emacs-安装"><a href="#Emacs-安装" class="headerlink" title="Emacs 安装"></a>Emacs 安装</h2><p>由于emacs有terminal和GUI版本，一个是在命令行，一个是在图形界面，但是这两个其实没什么差别。因为在终端里展示的emacs和GUI的emacs布局和功能完全一样。因此你可以选择你需要的安装。我只安装了terminal下的emacs。同时用到了一个大神的emacs配置文件，因为原生的emacs不是和人性化，而这个大神的自定义配置非常好用。拿来主义主义，何乐不为？</p>
+<p>GUI版本下载地址：<a href="https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg" target="_blank" rel="external">https://emacsformacosx.com/download/emacs-builds/Emacs-25.1-1-universal.dmg</a><br>terminal版本安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install emacs --with-cocoa</div></pre></td></tr></table></figure>
+<p>安装这emacs后下面就可以开始配置emacs了。这个配置文件的相关源码可以在github上找到<a href="https://github.com/purcell/emacs.d" target="_blank" rel="external">https://github.com/purcell/emacs.d</a></p>
+<h3 id="安装配置文件"><a href="#安装配置文件" class="headerlink" title="安装配置文件"></a>安装配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/purcell/emacs.d.git ~/.emacs.d</div></pre></td></tr></table></figure>
+<p>如果提示文件夹.emacs.d已存在，去删掉这个文件夹然后重新执行这条命令就可以了</p>
+<h3 id="启动emacs，验证配置生效"><a href="#启动emacs，验证配置生效" class="headerlink" title="启动emacs，验证配置生效"></a>启动emacs，验证配置生效</h3><p>1.在图形界面启动直接去application中找到emacs双击启动就好<br>2.在Terminal下启动GUI emacs 输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">open <span class="_">-a</span> emacs fileName</div></pre></td></tr></table></figure>
+<p>3.在terminal下启动terminal emacs 直接输入 emacs 即可</p>
+<p>第一次打开需要下载安装一些包会慢一些，等一段时间后可以看到这样一个界面,既配置成功</p>
+<p><img src="http://i1.piimg.com/586854/d562b791985690df.jpg" alt="emacs初始界面"></p>
+<h3 id="Mac键盘-M-x-按键调整"><a href="#Mac键盘-M-x-按键调整" class="headerlink" title="Mac键盘 M-x 按键调整"></a>Mac键盘 M-x 按键调整</h3><p>emacs需要经常使用到ctrl键和alt键，但是在mac键盘的默认配置中是没有alt按键的。此时需要对自己的键盘做调整。</p>
+<p>我是将左边的option按键当成alt按键<br>1.在terminal模式下，找到emacs的配置文件.emacs.d/init.el 加如下配置更改键盘</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(setq ns-right-alternate-modifier nil)</div></pre></td></tr></table></figure>
+<p>2.或者在term终端工具的“偏好设置”-“描述文件”-“键盘”，勾选“将option键作为Meta键”也可以</p>
+<p><img src="http://p1.bqimg.com/586854/adde48f934a56920.jpg" alt="终端修改按键"></p>
+<h3 id="到此emacs的基本配置就结束啦～～～～"><a href="#到此emacs的基本配置就结束啦～～～～" class="headerlink" title="到此emacs的基本配置就结束啦～～～～"></a>到此emacs的基本配置就结束啦～～～～</h3><h2 id="emacs中编译执行c-c"><a href="#emacs中编译执行c-c" class="headerlink" title="emacs中编译执行c++/c"></a>emacs中编译执行c++/c</h2><h4 id="1-emacs创建新文件helloWorld-cpp"><a href="#1-emacs创建新文件helloWorld-cpp" class="headerlink" title="1.emacs创建新文件helloWorld.cpp"></a>1.emacs创建新文件helloWorld.cpp</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">emacs helloWorld.cpp</div></pre></td></tr></table></figure>
+<p>此处需要知道，emacs代码是根据文件类型进行高亮的，如果你创建的文件叫helloWorld而不是helloWorld.cpp<br>那么很可能代码就没有高亮效果</p>
+<h4 id="2-编写最经典的helloworld程序"><a href="#2-编写最经典的helloworld程序" class="headerlink" title="2.编写最经典的helloworld程序"></a>2.编写最经典的helloworld程序</h4><p><img src="http://p1.bqimg.com/586854/c5661003303710d5.jpg" alt="helloWorld"></p>
+<h4 id="Meta-x-compile-进行编译（其中Meta-x-就是-alt-x按键）"><a href="#Meta-x-compile-进行编译（其中Meta-x-就是-alt-x按键）" class="headerlink" title="Meta-x compile 进行编译（其中Meta-x 就是 alt+x按键）"></a>Meta-x compile 进行编译（其中Meta-x 就是 alt+x按键）</h4><p>此处我用clang++ 进行编译</p>
+<p><img src="http://p1.bqimg.com/586854/67de1efd82cf5f48.jpg" alt="编译"></p>
+<h3 id="Meta-x-shell-启动shell执行编译后的输出文件a-out"><a href="#Meta-x-shell-启动shell执行编译后的输出文件a-out" class="headerlink" title="Meta+x shell 启动shell执行编译后的输出文件a.out"></a>Meta+x shell 启动shell执行编译后的输出文件a.out</h3><p><img src="http://p1.bqimg.com/586854/6a1cc503b282835c.jpg" alt="输出"></p>
+<p>自此，命令行下编写，编译，执行c／c++ 的开发环境就弄好了。配合着vim使用药效更佳。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/11/09/java_concurrent_volatile_sychronized/" class="archive-article-date">
-      <time datetime="2017-11-09T08:53:46.000Z" itemprop="datePublished">11-09</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/09/java_concurrent_volatile_sychronized/">Synchronized与volatile</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+    <a class="article-category-link" href="/categories/tool/">tool</a>
     </div>
 
 
-          
+      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发编程/">并发编程</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/emacs/">emacs</a></li></ul>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/11/03/java_map_1/" class="archive-article-date">
-      <time datetime="2017-11-03T08:53:46.000Z" itemprop="datePublished">11-03</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/03/java_map_1/">Map的深入理解(一：概览)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
-    </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/11/01/java_string/" class="archive-article-date">
-      <time datetime="2017-11-01T08:53:46.000Z" itemprop="datePublished">11-01</time>
-</a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/01/java_string/">Java基本对象解析(String)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
-    </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/String/">String</a></li></ul>
-    </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
-
-    
-
 </div>
       <footer id="footer">
     <div class="outer">
@@ -436,6 +407,10 @@
         })
     </script>
 
+
+    
+
+     
 
 
 
