@@ -34,7 +34,7 @@ volatile
 当多线程场景下，对于共享资源的并发访问会导致“线程安全”问题，而影响线程安全的因素实际上归结为2个要点：互斥访问和可见性。当多线程环境同时保证了对共享资源的互斥和可见性时，就能保证“线程安全”
 原子性：一个步骤或多个步骤，不可被拆分，流程不可被中断，要么全部执行，要么全部不执行。对于原子操作不允许发生">
 <meta property="og:image" content="http://45.77.21.149:1234/owncloud/index.php/s/PQlQN48u0ZhD7Fx/download">
-<meta property="og:updated_time" content="2017-11-13T04:09:28.000Z">
+<meta property="og:updated_time" content="2017-11-13T04:20:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Synchronized与volatile">
 <meta name="twitter:description" content="今天我们要辨析的是多线程中经常会遇到的两个关键字：
@@ -156,13 +156,13 @@ volatile
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜單</li>
-                        <li>標籤</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>友情鏈接</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>關於我</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -274,7 +274,7 @@ volatile
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="標籤" friends="友情鏈接" about="關於我"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap"><article id="post-java_concurrent_volatile_sychronized" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -332,17 +332,17 @@ volatile
 <p><strong>临界区</strong>：互斥访问的代码块称为临界区</p>
 <p>1.保证原子操作一定是线程安全的吗？<br>否。假设有一个资源量，假设初始值为0，有两个线程将对该资源做加1操作。当读操作原子性时，两个线程<em>同时</em>都读到该值为0，并 <em>分别</em> 做加1操作，A线程完成加1操作后值为1，B线程完成加1操作后值也为1，这里产生的问题就在于两个线程一共做了2次加1操作，但是最后的结果却仍为1，而不是2. 问题就出在，两个线程对共享变量操作后的结果双方不可见，如果其中任意一个线程再做完加1操作后，其他线程都能看到该结果，那么就不会发生这种情况。<br>即：A线程做完加1操作后，B线程发现A做了加1操作，然后放弃自己刚才读取到的值0 而是重新读取新值1，再做加1操作那么就会得到正确结果<br>（注：对于多个原子操作的组合，这个组合不一定是原子的。比如：i++，实际上分为2步，先读取i的值，再对i做加1操作。读取i的值是原子操作，加1操作也是原子操作，但是i++操作并不是原子操作（也有可能是原子的，但不一定），它在两个步骤的中间，可以发生时间片切换（线程切换）。举个例子：当你的手伸向餐盘打算拿起一块面包时，突然面包不见了，变成了榴莲…因为在你拿的过程中，另一个人把它吃了，给你放上了榴莲…而你却看不到他 PS：本人最痛恨榴莲。如果要保证你在取面包的过程中没人能打扰，那么你可以在你房间加一个门，门口有一把钥匙，进门之前，你需要取下门口的钥匙，打开门，带着钥匙进去吃面包，吃完出房间关上门，然后把钥匙放回。）</p>
 <p>2.保证可见性，一定线程安全吗？<br>否。继续上面的例子。上面的操作时2个线程同时读取值，然后分别进行加1操作，这个时候，保证可见性,他们的最终结果是对的。但是，如果同时读取值，又同时操作，最后写到主存的结果还会1.<br>具体还需要结合Java内存模型进行学习，详细资料可以参考<a href="http://blog.csdn.net/muxiqingyang/article/details/6615199" target="_blank" rel="external">《大话处理器》Cache一致性协议之MESI</a>，非常推荐去阅读一下，看是如何在cpu不同核心之间的保持Cache的一致性</p>
-<h2 id="JAVA内存模型："><a href="#JAVA内存模型：" class="headerlink" title="JAVA内存模型："></a>JAVA内存模型：</h2><p>在现在的多核cpu中，每个核心都有自己的核内Cache，当线程执行时，先从主存读取数据到线程的工作内存，然后对线程的工作内存内的数据副本进行操作，该工作内存位于线程所在的核心的Cache中。处于性能的考虑，线程操作后的数据并不会立即写回到主存中。当其他线程从主存读取该贡献变量时，实际上读到的就是脏数据（实效数据）。<br>其结构图大概如下：(该图转载自:<a href="https://www.ziwenxie.site/2017/04/24/java-multithread-volatile/" target="_blank" rel="external">Java并发编程之volatile关键字解析</a>)<br><img src="http://45.77.21.149:1234/owncloud/index.php/s/PQlQN48u0ZhD7Fx/download" alt="java内存模型"></p>
+<h2 id="JAVA内存模型："><a href="#JAVA内存模型：" class="headerlink" title="JAVA内存模型："></a>JAVA内存模型：</h2><p>在现在的多核cpu中，每个核心都有自己的核内Cache，当线程执行时，先从主存读取数据到线程的工作内存，然后对线程的工作内存内的数据副本进行操作，该工作内存位于线程所在的核心的Cache中。出于性能的考虑，线程操作后的数据并不会立即写回到主存中。当其他线程从主存读取该共享变量时，实际上读到的就是脏数据（失效数据）。<br>其结构图大概如下：(该图转载自:<a href="https://www.ziwenxie.site/2017/04/24/java-multithread-volatile/" target="_blank" rel="external">Java并发编程之volatile关键字解析</a>)<br><img src="http://45.77.21.149:1234/owncloud/index.php/s/PQlQN48u0ZhD7Fx/download" alt="java内存模型"></p>
 <p>需要注意的是，每个线程的工作内存（位于核内Cache）中的数据副本并不是说直接把主存的内容完全拷贝复制一份，而是保存其引用，对于其中用到的字段会进行复制拷贝。</p>
-<p>如何保证可见性：<br>当线程A和线程B读取了主存上的值v，同时存一个副本在线程内部的本地内存MA和本地内存MB，当线程A对MA内的副本进行修改后，则置本地副本的变量所在的内存为M（modify）标记，同时因为本地内存MB也有该副本，这个时候本地内存MB的该变量的所在内存被标记为I（Invalid）标记，当线程B对本地内存MB内的共享数据进行读取时，发现标记无效，则使本地内存MA上modify的数据写回主存，然后线程B再从内存中读取该值进行操作。为什么保证可见性仍然不能保证形成安全就在于，当线程A和线程B同时对本地内存进行操作时，因为这个时候两个线程内的数据都是原来的数据，双方已经一致，因此也可以同时进行操作，操作后同时提交到总线上进行cache之间的同步，这个时候就该协议就会失效。</p>
+<p>如何保证可见性：<br>当线程A和线程B读取了主存上的值v，同时存一个副本在线程内部的本地内存MA和本地内存MB，当线程A对MA内的副本进行修改后，则置本地副本的变量所在的内存为M（modify）标记，同时因为本地内存MB也有该副本，这个时候本地内存MB的该变量的所在内存被标记为I（Invalid）标记，当线程B对本地内存MB内的共享数据进行读取时，发现标记无效，则使本地内存MA上modify的数据写回主存，然后线程B再从内存中读取该值进行操作（也可能是直接到MA中读取）。为什么保证可见性仍然不能保证形成安全就在于，当线程A和线程B同时对本地内存进行操作时，因为这个时候两个线程内的数据都是原来的数据，双方已经一致，因此也可以同时进行操作，操作后同时提交到总线上进行cache之间的同步，这个时候就该协议就会失效。</p>
 <h2 id="java指令重排序"><a href="#java指令重排序" class="headerlink" title="java指令重排序"></a>java指令重排序</h2><p>网上有一篇个人感觉已经足够详细和浅显易懂的文章，所以此处不再赘述，请移步《<a href="http://blog.csdn.net/pzxwhc/article/details/48984209" target="_blank" rel="external">指令重排序</a>》</p>
 <p>前面铺垫了这么多，终于可以来说说volatile和sychronized了</p>
 <h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>当共享变量用关键字volatile标记后，该共享变量就会保证一下两个规则：</p>
 <ul>
 <li>保证多线程间共享变量的可见性</li>
-<li>局部禁止指令重排序，只针对被volatile标注的对象<br>1）当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作肯定还没有进行<br>2）在进行指令优化时，不能将在对volatile变量访问的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。<br>：<br>来看一段代码<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">线程A</div><div class="line"><span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</div><div class="line"><span class="keyword">while</span>(!stop)&#123;</div><div class="line">  doSomething();</div><div class="line">&#125;</div><div class="line"></div><div class="line">线程B</div><div class="line">stop = <span class="keyword">true</span>;</div></pre></td></tr></table></figure>
-</li>
+<li>局部禁止指令重排序，只针对被volatile标注的对象<br>1）当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作肯定还没有进行<br>2）在进行指令优化时，不能将在对volatile变量访问的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。</li>
 </ul>
+<p>来看一段代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">线程A</div><div class="line"><span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</div><div class="line"><span class="keyword">while</span>(!stop)&#123;</div><div class="line">  doSomething();</div><div class="line">&#125;</div><div class="line"></div><div class="line">线程B</div><div class="line">stop = <span class="keyword">true</span>;</div></pre></td></tr></table></figure></p>
 <p>上述代码存在一个问题，因为当线程B对stop赋值时，其最新结果可能仍然保存在线程的本地内存中，并未写回到主存，而同时，线程A中仍然保存着原来的旧数据，这将导致很长一段时间内，while循环将不断继续。<br>当对stop使用volaitle关键字以后，当线程B对stop进行修改，则stop的数据将立即写到主存，而线程A的本地缓存的数据也已经被置为失效，此时线程A再次读取stop时将重新冲主存中读取，那么就可以的到最新的值。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//x、y为非volatile变量</span></div><div class="line"><span class="comment">//flag为volatile变量</span></div><div class="line"> </div><div class="line">x = <span class="number">2</span>;        <span class="comment">//语句1</span></div><div class="line">y = <span class="number">0</span>;        <span class="comment">//语句2</span></div><div class="line">flag = <span class="keyword">true</span>;  <span class="comment">//语句3</span></div><div class="line">x = <span class="number">4</span>;         <span class="comment">//语句4</span></div><div class="line">y = -<span class="number">1</span>;       <span class="comment">//语句5</span></div></pre></td></tr></table></figure>
 <p>“由于flag变量为volatile变量，那么在进行指令重排序的过程的时候，不会将语句3放到语句1、语句2前面，也不会讲语句3放到语句4、语句5后面。但是要注意语句1和语句2的顺序、语句4和语句5的顺序是不作任何保证的。</p>
@@ -368,17 +368,17 @@ volatile
   
     
     <div class="copyright">
-        <p><span>本文標題:</span><a href="/2017/11/09/java_concurrent_volatile_sychronized/">Synchronized与volatile</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主頁">王瑞飞</a></p>
-        <p><span>發布時間:</span>2017-11-09, 16:53:46</p>
-        <p><span>最後更新:</span>2017-11-13, 12:09:28</p>
+        <p><span>本文标题:</span><a href="/2017/11/09/java_concurrent_volatile_sychronized/">Synchronized与volatile</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">王瑞飞</a></p>
+        <p><span>发布时间:</span>2017-11-09, 16:53:46</p>
+        <p><span>最后更新:</span>2017-11-13, 12:20:20</p>
         <p>
-            <span>原始鏈接:</span><a class="post-url" href="/2017/11/09/java_concurrent_volatile_sychronized/" title="Synchronized与volatile">wangruifei.github.io/2017/11/09/java_concurrent_volatile_sychronized/</a>
-            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/11/09/java_concurrent_volatile_sychronized/　　作者: 王瑞飞" title="點擊複製文章鏈接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/09/java_concurrent_volatile_sychronized/" title="Synchronized与volatile">wangruifei.github.io/2017/11/09/java_concurrent_volatile_sychronized/</a>
+            <span class="copy-path" data-clipboard-text="原文: wangruifei.github.io/2017/11/09/java_concurrent_volatile_sychronized/　　作者: 王瑞飞" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>許可協議:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"姓名標示-非商業性-相同方式分享 4.0 國際"</a> 轉載請保留原文鏈接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -399,7 +399,7 @@ volatile
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目錄</strong>
+        <strong class="toc-title">文章目录</strong>
         
             <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA内存模型："><span class="toc-number">1.</span> <span class="toc-text">JAVA内存模型：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java指令重排序"><span class="toc-number">2.</span> <span class="toc-text">java指令重排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#volatile"><span class="toc-number">3.</span> <span class="toc-text">volatile</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么情况下使用volatile？"><span class="toc-number">3.1.</span> <span class="toc-text">什么情况下使用volatile？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sychronized"><span class="toc-number">4.</span> <span class="toc-text">sychronized</span></a></li></ol>
         
@@ -415,10 +415,10 @@ volatile
         }
     </style>
 
-    <input type="button" id="tocButton" value="隱藏目錄"  title="點擊按鈕隱藏或者顯示文章目錄">
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
     <script>
-        yiliaConfig.toc = ["隱藏目錄", "顯示目錄", !!"false"];
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
     </script>
 
 
@@ -471,7 +471,7 @@ volatile
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主頁"><i class="fa fa-home"></i></a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -500,14 +500,14 @@ volatile
                 2017 王瑞飞
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、簡潔且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="簡而不減 Hexo 雙欄博客主題  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到訪數"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -516,7 +516,7 @@ volatile
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本頁閱讀量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -549,9 +549,9 @@ volatile
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回頂部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看評論"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="轉到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
